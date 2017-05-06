@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "pi-spi": "^1.0.1"
+    "pi-spi": "^1.0.1",
+    "source-map-support": "^0.4.15"
   }
 }

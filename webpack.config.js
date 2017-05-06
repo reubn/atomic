@@ -30,7 +30,12 @@ module.exports = env => {
           NODE_ENV: JSON.stringify(devMode ? 'development' : 'production')
         }
       }),
-      !devMode ? new BabiliPlugin() : () => undefined
+      !devMode ? new BabiliPlugin() : () => undefined,
+      devMode ? new webpack.BannerPlugin({
+        banner: `require('source-map-support').install()`,
+        raw: true
+      }) : () => undefined,
+
     ]
   }
 
