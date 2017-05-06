@@ -10,7 +10,7 @@ module.exports = env => {
     entry: ['babel-polyfill', './src'],
     output: {
       path: __dirname + '/dist',
-      filename: 'bundle.js'
+      filename: 'index.js'
     },
     target: 'node',
     externals: [nodeExternals()],
@@ -32,7 +32,7 @@ module.exports = env => {
       }),
       !devMode ? new BabiliPlugin() : () => undefined,
       devMode ? new webpack.BannerPlugin({
-        banner: `require('source-map-support').install()`,
+        banner: `require('source-map-support').install();`,
         raw: true
       }) : () => undefined,
 
