@@ -8,7 +8,8 @@
     "build:dev": "webpack --env=development && yarn copy",
     "build": "webpack --env=production && yarn copy",
     "copy": "cp package.json dist/ && cp yarn.lock dist/",
-    "deploy": "cd dist && git add . && git commit -a -m RemotePush && git push --set-upstream pi master"
+    "deploy": "cd dist && git add . && git commit -a -m RemotePush && git push --set-upstream pi master",
+    "buildDeploy": "yarn build:dev && yarn deploy"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
