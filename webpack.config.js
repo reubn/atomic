@@ -13,6 +13,10 @@ module.exports = env => {
       filename: 'index.js'
     },
     target: 'node',
+    node: {
+      __dirname: false,
+      __filename: false
+    },
     externals: [nodeExternals()],
     devtool: devMode ? 'source-map' : undefined,
     module: {
