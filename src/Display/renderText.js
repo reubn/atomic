@@ -1,6 +1,6 @@
 import font from './font'
 
-export default (text, {width: displayWidth=8*4, height: displayHeight=8}={}, hex) => {
+export default (text, {width: displayWidth=8*4, height: displayHeight=8}={}) => {
   const setLetters = [...text].reduce((cols, char) => {
     if(!font[char]) return cols
 
@@ -26,7 +26,5 @@ export default (text, {width: displayWidth=8*4, height: displayHeight=8}={}, hex
   const heightPaddingBefore = Array(heightBefore).fill(0)
   const heightPaddingAfter = Array(heightAfter).fill(0)
 
-  const whole = [...widthPaddingBefore, ...setLetters.map(col => [...heightPaddingBefore, ...col, ...heightPaddingAfter]), ...widthPaddingAfter]
-
-  return hex ? whole.map(col => parseInt(col.join``, 2)) : whole
+  return [...widthPaddingBefore, ...setLetters.map(col => [...heightPaddingBefore, ...col, ...heightPaddingAfter]), ...widthPaddingAfter]
 }
