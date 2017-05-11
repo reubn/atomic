@@ -38,8 +38,10 @@ class Max7219 {
       .map((x, index) => {
         // If we're at the first byte (register) of the correct board
         if(index === chainPosition * 2) return register
+
         // If we're at the second byte (data) of the correct board
         if(index === (chainPosition * 2) + 1) return data
+
         // Else, if its a first byte, add the NoOp register, or blank data
         return (index % 2) ? NOOP : 0x0
       })
