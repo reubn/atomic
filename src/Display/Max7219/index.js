@@ -43,7 +43,7 @@ class Max7219 {
         if(index === (chainPosition * 2) + 1) return data
 
         // Else, if its a first byte, add the NoOp register, or blank data
-        return (index % 2) ? NOOP : 0x0
+        return !(index % 2) ? NOOP : 0x0
       })
 
     // Create Buffer from byteArray
