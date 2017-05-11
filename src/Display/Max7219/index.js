@@ -34,7 +34,7 @@ class Max7219 {
     // Construct Array - 2 bytes per board.
     const byteArray =
       Array(this.chainLength * 2)
-      .fill(0)
+      .fill(0x0)
       .map((x, index) => {
         // If we're at the first byte (register) of the correct board
         if(index === chainPosition * 2) return register
