@@ -12,6 +12,8 @@ const NOOP = 0x0
 const MAX_INTENSITY = 0xF
 
 class Max7219 {
+  static unitDimension = 8
+
   constructor(device='/dev/spidev0.0', chainLength=1){
     // Initialise SPI device
     this.spi = SPI.initialize(device)
@@ -26,12 +28,6 @@ class Max7219 {
 
     // Disable Test Mode
     this.write(DISPLAYTEST, 0x0)
-
-    // Turn display on
-    this.write(SHUTDOWN, 0x1)
-
-    // Set medium intensity
-    this.setIntensity(0x7)
   }
 
   write(register, data, chainPosition=0){
@@ -58,6 +54,11 @@ class Max7219 {
   setIntensity(intensity){
     // Write Intensity, clamped by values
     this.write(INTENSITY, Math.min(MAX_INTENSITY, Math.max(0x0, intensity)))
+  }
+
+  setPower(on){
+    // Turn display on or off
+    this.write(SHUTDOWN, on ? 0x1 : 0x0)
   }
 }
 
