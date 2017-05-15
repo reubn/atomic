@@ -30,7 +30,7 @@ class Max7219 {
 
   writeForAll(register, data){
     // Write data, with all positions selected
-    return this.write(register, data, Array(this.chainLength).fill(0).map((x, i) => i))
+    return this.write(register, data, Array(this.chainLength).fill().map((x, i) => i))
   }
 
   write(register, data, chainPositions=[0]){

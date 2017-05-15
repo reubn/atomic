@@ -23,7 +23,7 @@ class Display {
 
   clear(){
     // Create blank array
-    const blankArray = Array(this.max7219.chainLength * this.max7219.unitDimension).fill(0).map(() => Array(this.max7219.unitDimension).fill(0))
+    const blankArray = Array(this.max7219.chainLength * this.max7219.unitDimension).fill(0).map(() => Array(this.max7219.unitDimension).fill(false))
 
     // Display the blank array
     this.display2DArray(blankArray)
@@ -41,7 +41,7 @@ class Display {
     const rotated = chunks.reduce((array, chunk) => [...array, ...chunk.reverse().reduce((prev, next) => next.map((item, i) => [...(prev[i] || []), next[i]]), [])], []).reverse()
 
     // Convert the rows to hex values
-    const flattenedRows = rotated.map(col => parseInt(col.join``, 2))
+    const flattenedRows = rotated.map(col => parseInt(col.map(p => (p ? 1 : 0)).join``, 2))
 
     flattenedRows.forEach((data, index) => {
       // Register for which this data is applicable
