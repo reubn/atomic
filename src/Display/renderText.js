@@ -1,6 +1,6 @@
 import font from './font'
 
-export default (text, {width: displayWidth=8*4, height: displayHeight=8}={}) => {
+export default (text, displayWidth, displayHeight) => {
   const setLetters = [...text].reduce((cols, char) => {
     if(!font[char]) return cols
 
