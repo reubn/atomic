@@ -23,7 +23,7 @@ class Display {
 
   clear(){
     // Create blank array
-    const blankArray = Array(this.max7219.chainLength * this.max7219.unitDimension).fill(0).map(() => Array(this.max7219.unitDimension).fill(false))
+    const blankArray = Array(this.max7219.chainLength * this.max7219.unitDimension).fill().map(() => Array(this.max7219.unitDimension).fill(false))
 
     // Display the blank array
     this.display2DArray(blankArray)
