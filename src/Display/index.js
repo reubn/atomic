@@ -5,20 +5,25 @@ class Display {
     // Initialise Controller
     this.max7219 = new Max7219('/dev/spidev0.0', chainLength)
 
-    // Turn display on
-    this.max7219.setPower(true)
-
-    // Set low intensity
-    this.max7219.setIntensity(1)
-
-    // Clear Display
-    this.clear()
+    // Reset Display to predictable state
+    this.reset()
 
     // Width
     this.width = this.max7219.unitDimension * chainLength
 
     // Height
     this.height = this.max7219.unitDimension
+  }
+
+  reset(){
+    // Turn display on
+    this.setPower(true)
+
+    // Set low intensity
+    this.setIntensity(1)
+
+    // Clear Display
+    this.clear()
   }
 
   clear(){
@@ -53,6 +58,14 @@ class Display {
       // Write data
       this.max7219.write(register, data, [chainPosition])
     })
+  }
+
+  setIntensity(...args){
+    return this.max7219.setIntensity(...args)
+  }
+
+  setPower(...args){
+    return this.max7219.setPower(...args)
   }
 
 }

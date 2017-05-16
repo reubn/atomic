@@ -1,8 +1,14 @@
-import moment from 'moment'
+import DisplayManager from './DisplayManager'
+import ClockView from './ClockView'
+// import TestView from './TestView'
+// import IntensityView from './IntensityView'
 
-import Display from './Display'
-import renderText from './Display/renderText'
+const manager = new DisplayManager(4)
+const clockView = new ClockView()
+// const testView = new TestView()
+// const intensityView = new IntensityView()
 
-const display = new Display(4)
-
-setInterval(() => display.display2DArray(renderText(moment().format('h:mm:ss'), display.width, display.height)), 1000)
+manager.connect(clockView)
+// let alternate = 1
+// const views = [clockView, intensityView]
+// setInterval(() => manager.connect(views[alternate++ % views.length]), 16000)
