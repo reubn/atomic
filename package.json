@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "jfs": "^0.2.6",
     "moment": "^2.18.1",
+    "nedb": "^1.8.0",
     "pi-spi": "^1.0.1",
     "source-map-support": "^0.4.15"
   }
