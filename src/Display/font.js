@@ -10,5 +10,9 @@ export default (o, l=!o) => ({
   8: [[l, l, l, l], [l, o, l, l], [l, l, l, l]],
   9: [[l, l, l, o], [l, o, l, o], [l, l, l, l]],
   ':': [[o, l, o, l]],
-  ' ': [[o, o, o, o]]
+  ' ': [[o, o, o, o]],
+  a: [[l, l, l, l], [l, o, l, o], [l, l, l, l]],
+  l: [[l, l, l, l], [o, o, o, l], [o, o, o, l]],
+  m: [[l, l, l, l], [l, l, o, o], [l, l, l, l]],
+  r: [[l, l, l, l], [l, o, l, o], [o, l, o, l]]
 })

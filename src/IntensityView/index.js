@@ -17,7 +17,7 @@ class IntensityView {
 
   render(display){
     display.setIntensity(this.index)
-    display.display2DArray(renderText(this.index+'', display.width, display.height, true))
+    display.display2DArray(renderText(`${this.index}`, display.width, display.height, true))
 
     this.index = (this.index + 1) % 16
   }
