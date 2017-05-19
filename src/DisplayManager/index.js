@@ -10,7 +10,7 @@ class DisplayManager {
   connect(view){
     if(this.currentView) this.disconnect(this.currentView)
 
-    view.start(this.display)
+    view.start(this.display, next => (next ? this.connect(next) : this.disconnect(view)))
     this.currentView = view
   }
 
@@ -18,6 +18,8 @@ class DisplayManager {
     if(view === this.currentView){
       this.currentView.end()
       this.display.reset()
+
+      this.currentView = null
     }
   }
 }
