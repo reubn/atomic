@@ -1,14 +1,28 @@
+import moment from 'moment'
+
+import Alarm from './Alarm'
+
 import DisplayManager from './DisplayManager'
 import ClockView from './ClockView'
-// import TestView from './TestView'
-// import IntensityView from './IntensityView'
+import AlarmView from './AlarmView'
 
 const manager = new DisplayManager(4)
 const clockView = new ClockView()
-// const testView = new TestView()
-// const intensityView = new IntensityView()
+const alarmView = new AlarmView(clockView)
 
 manager.connect(clockView)
-// let alternate = 1
-// const views = [clockView, intensityView]
-// setInterval(() => manager.connect(views[alternate++ % views.length]), 16000)
+
+Alarm.clearAll()
+.then(() => {
+  const {hours: hour, minutes: minute, seconds: second} = moment().add(10, 's').toObject()
+
+  const testAlarm = new Alarm({
+    name: 'Test 1',
+    scheduleDescriptor: {hour, minute, second}
+  })
+
+  return testAlarm.save()
+})
+.then(Alarm.fromDB)
+.then(alarms => alarms.map(alarm => alarm.schedule(() => manager.connect(alarmView))))
+.then(scheduledAlarms => console.log('ALL', scheduledAlarms))
