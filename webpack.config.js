@@ -25,6 +25,10 @@ module.exports = env => {
           test: /\.js$/,
           use: 'babel-loader',
           exclude: /node_modules/
+        },
+        {
+          test: /\.wav$/,
+          use: 'file-loader'
         }
       ]
     },

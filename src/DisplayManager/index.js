@@ -1,27 +1,9 @@
-import Display from '../Display'
+import clockView from '../clockView'
 
-class DisplayManager {
-  constructor(...args){
-    this.currentView = null
+import DisplayManager from './DisplayManager'
 
-    this.display = new Display(...args)
-  }
+const manager = new DisplayManager(4)
 
-  connect(view){
-    if(this.currentView) this.disconnect(this.currentView)
+manager.connect(clockView)
 
-    view.start(this.display, next => (next ? this.connect(next) : this.disconnect(view)))
-    this.currentView = view
-  }
-
-  disconnect(view){
-    if(view === this.currentView){
-      this.currentView.end()
-      this.display.reset()
-
-      this.currentView = null
-    }
-  }
-}
-
-export default DisplayManager
+export default manager

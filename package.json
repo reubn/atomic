@@ -25,10 +25,12 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "file-loader": "^0.11.1",
     "webpack": "^2.5.0",
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
+    "aplay": "^1.1.0",
     "babel-polyfill": "^6.23.0",
     "moment": "^2.18.1",
     "nedb": "^1.8.0",
