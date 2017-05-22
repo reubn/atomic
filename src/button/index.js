@@ -10,12 +10,19 @@ class Button extends EventEmitter {
     super()
 
     this.pin = pin
+
+    this.state = null
+
     rpio.open(pin, rpio.INPUT, rpio.PULL_DOWN)
     rpio.poll(pin, (...args) => this.pollCallback(...args))
   }
 
   pollCallback(pin){
-    this.emit(!rpio.read(pin) ? press : release)
+    const newState = !rpio.read(pin)
+    if(this.state === newState) return
+
+    this.state = newState
+    this.emit(this.state ? press : release)
   }
 }
 
