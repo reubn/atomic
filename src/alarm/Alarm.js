@@ -2,8 +2,9 @@ import Datastore from 'nedb'
 import {scheduleJob} from 'node-schedule'
 
 import storeDir from '../store'
+import manager from '../manager'
 
-import routine from './routine'
+import Act from './Act'
 
 const store = new Datastore({filename: `${storeDir}/alarms`, autoload: true})
 
@@ -39,7 +40,7 @@ class Alarm {
   }
 
   schedule(handler){
-    if(!this.isScheduled) this.scheduledJob = scheduleJob(this.scheduleDescriptor, () => handler || routine(this))
+    if(!this.isScheduled) this.scheduledJob = scheduleJob(this.scheduleDescriptor, () => (handler ? handler(this) : manager.connect(new Act(this))))
 
     return this
   }

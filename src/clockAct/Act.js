@@ -2,14 +2,14 @@ import moment from 'moment'
 
 import renderText from '../Display/renderText'
 
-class ClockView {
+class ClockAct {
   constructor(){
     this.timer = null
 
     this.alternateEvenOdd = 0
   }
 
-  start(display){
+  start({display}){
     this.render(display)
     this.timer = setInterval(() => this.render(display), 500)
   }
@@ -24,4 +24,4 @@ class ClockView {
   }
 }
 
-export default ClockView
+export default ClockAct
