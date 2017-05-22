@@ -1072,6 +1072,10 @@ binary-search-tree@0.2.5:
   dependencies:
     underscore "~1.4.4"
 
+bindings@*:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
+
 block-stream@*:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/block-stream/-/block-stream-0.0.9.tgz#13ebfe778a03205cfe03751481ebb4b3300c126a"
@@ -2642,7 +2646,7 @@ mute-stream@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.5.tgz#8fbfabb0a98a253d3184331f9e8deb7372fac6c0"
 
-nan@^2.1.0, nan@^2.3.0:
+nan@*, nan@^2.1.0, nan@^2.3.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
 
@@ -3231,6 +3235,13 @@ rimraf@2, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.6.1:
 ripemd160@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-1.0.1.tgz#93a4bbd4942bc574b69a8fa57c71de10ecca7d6e"
+
+rpio@^0.9.16:
+  version "0.9.16"
+  resolved "https://registry.yarnpkg.com/rpio/-/rpio-0.9.16.tgz#dc4750db099c7e0e6e6505aa86297f4a23aaf5d6"
+  dependencies:
+    bindings "*"
+    nan "*"
 
 run-async@^0.1.0:
   version "0.1.0"

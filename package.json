@@ -36,6 +36,7 @@
     "nedb": "^1.8.0",
     "node-schedule": "^1.2.1",
     "pi-spi": "^1.0.1",
+    "rpio": "^0.9.16",
     "source-map-support": "^0.4.15"
   }
 }
