@@ -21,8 +21,8 @@ class AlarmAct {
 
     // Player
     this.continuePlaying = true
-    player.play(sound)
-    player.on('complete', () => this.continuePlaying && player.play(sound))
+    player.openFile(sound)
+    player.player.cmd('set_property loop 0')
 
     // Display
     display.setIntensity(16)

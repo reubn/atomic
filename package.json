@@ -30,9 +30,9 @@
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
-    "aplay": "^1.1.0",
     "babel-polyfill": "^6.23.0",
     "moment": "^2.18.1",
+    "mplayer": "^2.1.0",
     "nedb": "^1.8.0",
     "node-schedule": "^1.2.1",
     "pi-spi": "^1.0.1",

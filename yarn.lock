@@ -76,10 +76,6 @@ anymatch@^1.3.0:
     arrify "^1.0.0"
     micromatch "^2.1.5"
 
-aplay@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/aplay/-/aplay-1.1.0.tgz#2b9cf5c826be6777c5c392e08974da317cc23e18"
-
 aproba@^1.0.3:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.1.1.tgz#95d3600f07710aa0e9298c726ad5ecf2eacbabab"
@@ -2542,6 +2538,10 @@ lodash.some@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.some/-/lodash.some-4.6.0.tgz#1bb9f314ef6b8baded13b549169b2a945eb68e4d"
 
+lodash@^2.4.1:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-2.4.2.tgz#fadd834b9683073da179b3eae6d9c0d15053f73e"
+
 lodash@^4.0.0, lodash@^4.14.0, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
@@ -2633,6 +2633,12 @@ minimist@^1.2.0:
 moment@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
+mplayer@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/mplayer/-/mplayer-2.1.0.tgz#0f68cb91ccd6a9d219a2024612e365d3351adb82"
+  dependencies:
+    lodash "^2.4.1"
 
 ms@0.7.1:
   version "0.7.1"

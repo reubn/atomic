@@ -1,4 +1,4 @@
-import Player from 'aplay'
+import Player from 'mplayer'
 
 import Display from '../Display'
 
@@ -27,7 +27,7 @@ class Manager {
     if(act === this.currentAct){
       this.currentAct.end(true)
 
-      this.player.pause()
+      this.player.stop()
       this.display.reset()
 
       this.currentView = null
