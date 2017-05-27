@@ -25,6 +25,7 @@ class AlarmAct {
     player.on('complete', () => this.continuePlaying && player.play(sound))
 
     // Display
+    display.setIntensity(16)
     this.render(display)
     this.timer = setInterval(() => this.render(display), 500)
 
@@ -40,7 +41,6 @@ class AlarmAct {
   }
 
   render(display){
-    display.setIntensity(this.index % 2 ? 16 : 1)
     display.display2DArray(renderText('alarm', display.width, display.height, this.index % 2))
 
     this.index++

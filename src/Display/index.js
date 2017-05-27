@@ -19,8 +19,8 @@ class Display {
     // Turn display on
     this.setPower(true)
 
-    // Set low intensity
-    this.setIntensity(1)
+    // Set medium intensity
+    this.setIntensity(8)
 
     // Clear Display
     this.clear()
