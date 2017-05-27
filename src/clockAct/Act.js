@@ -2,7 +2,7 @@ import moment from 'moment'
 
 import button, {press} from '../button'
 
-import renderText from '../Display/renderText'
+import {renderText} from '../Display'
 
 class ClockAct {
   constructor(){

@@ -71,3 +71,4 @@ class Display {
 }
 
 export default Display
+export {default as renderText} from './renderText'

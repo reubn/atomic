@@ -1,6 +1,6 @@
 import button, {press} from '../button'
 import clockAct from '../clockAct'
-import renderText from '../Display/renderText'
+import {renderText} from '../Display'
 
 import sound from './sound.wav'
 
