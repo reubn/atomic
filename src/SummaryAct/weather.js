@@ -23,5 +23,7 @@ export default async () => {
   const maxTempRounded = Math.round(maxTemp)
   const minTempRounded = Math.round(minTemp)
 
-  return `Today's forecast is ${descriptionsString}. The average temprature is ${averageTempRounded} degrees, with a high of ${maxTempRounded}, and low of ${minTempRounded}.`
+  const weatherSummary = `Today's forecast is ${descriptionsString}. The average temprature is ${averageTempRounded} degrees, with a high of ${maxTempRounded}, and low of ${minTempRounded}.`
+
+  return {weatherSummary, displayTemp: averageTempRounded}
 }

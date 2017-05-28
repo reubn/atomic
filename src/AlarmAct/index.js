@@ -1,11 +1,7 @@
-import moment from 'moment'
-
 import button, {press} from '../button'
-import clockAct from '../clockAct'
+import SummaryAct from '../SummaryAct'
 import {renderText} from '../Display'
-import {tts, alarmSound, successSound} from '../Sound'
-
-import weather from './weather'
+import {alarmSound, successSound} from '../Sound'
 
 class AlarmAct {
   constructor(alarm){
@@ -13,9 +9,6 @@ class AlarmAct {
 
     this.timer = null
     this.endHandle = null
-
-    // Weather
-    this.weatherPromise = weather()
 
     this.continuePlaying = false
 
@@ -28,7 +21,7 @@ class AlarmAct {
     // Sound
     this.continuePlaying = true
     sound.newSource(alarmSound)
-    sound.on('close', () => this.continuePlaying && sound.newSource(alarmSound, 'local'))
+    sound.on('close', () => this.continuePlaying && sound.newSource(alarmSound))
 
     // Display
     display.setIntensity(16)
@@ -39,26 +32,18 @@ class AlarmAct {
     button.once(press, () => this.onButtonPress(sound))
   }
   end(fromDisplayManager=false){
-    if(!fromDisplayManager) return this.endHandle(clockAct)
+    if(!fromDisplayManager) return this.endHandle(new SummaryAct())
 
     clearInterval(this.timer)
     this.endHandle = null
     this.continuePlaying = false
   }
 
-  async onButtonPress(sound){
+  onButtonPress(sound){
     this.continuePlaying = false
 
-    const weatherSummary = await this.weatherPromise
-    const ttsPath = await tts(`The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${weatherSummary}`)
-
-    await new Promise(resolve => {
-      sound.newSource(successSound)
-      sound.on('close', resolve)
-    })
-
     new Promise(resolve => {
-      sound.newSource(ttsPath, 'local')
+      sound.newSource(successSound)
       sound.on('close', resolve)
     })
     .then(() => this.end())
