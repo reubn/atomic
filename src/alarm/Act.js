@@ -2,7 +2,10 @@ import button, {press} from '../button'
 import clockAct from '../clockAct'
 import {renderText} from '../Display'
 
+import weather from './weather'
+import downloadTTS from './downloadTTS'
 import alarmSound from './alarm.wav'
+import feedbackSound from './feedback.wav'
 
 class AlarmAct {
   constructor(alarm){
