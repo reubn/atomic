@@ -32,8 +32,8 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "moment": "^2.18.1",
-    "mplayer": "^2.1.0",
     "nedb": "^1.8.0",
+    "node-omxplayer": "^0.4.1",
     "node-schedule": "^1.2.1",
     "pi-spi": "^1.0.1",
     "rpio": "^0.9.16",
