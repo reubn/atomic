@@ -1,4 +1,4 @@
-import clockAct from '../clockAct'
+import clockAct from '../acts/clock'
 
 import Manager from './Manager'
 

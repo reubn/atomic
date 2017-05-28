@@ -1,8 +1,8 @@
 import moment from 'moment'
 
-import clockAct from '../clockAct'
-import {renderText} from '../Display'
-import {tts} from '../Sound'
+import clockAct from '../clock'
+import {renderText} from '../../Display'
+import {tts} from '../../Sound'
 
 import weather from './weather'
 

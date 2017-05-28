@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 import manager from '../manager'
-import AlarmAct from '../AlarmAct'
+import AlarmAct from '../acts/Alarm'
 
 
 import Alarm from './Alarm'

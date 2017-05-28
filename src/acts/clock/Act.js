@@ -1,9 +1,9 @@
 import moment from 'moment'
 
-import button, {press} from '../button'
-import {tapSound} from '../Sound'
+import button, {press} from '../../button'
+import {tapSound} from '../../Sound'
 
-import {renderText} from '../Display'
+import {renderText} from '../../Display'
 
 class ClockAct {
   constructor(){

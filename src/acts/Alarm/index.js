@@ -1,7 +1,7 @@
-import button, {press} from '../button'
-import SummaryAct from '../SummaryAct'
-import {renderText} from '../Display'
-import {alarmSound, successSound} from '../Sound'
+import button, {press} from '../../button'
+import SummaryAct from '../Summary'
+import {renderText} from '../../Display'
+import {alarmSound, successSound} from '../../Sound'
 
 class AlarmAct {
   constructor(alarm){
