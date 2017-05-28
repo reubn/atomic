@@ -27,6 +27,7 @@ class Manager {
       this.currentAct.end(true)
 
       if(this.sound.running) this.sound.pause()
+      this.sound.removeAllListeners()
       this.display.reset()
 
       this.currentView = null
