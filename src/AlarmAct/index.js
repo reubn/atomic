@@ -14,8 +14,8 @@ class AlarmAct {
     this.timer = null
     this.endHandle = null
 
-    // TTS
-    this.ttsPromise = weather().then(summary => tts(`The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${summary}`))
+    // Weather
+    this.weatherPromise = weather()
 
     this.continuePlaying = false
 
@@ -46,19 +46,21 @@ class AlarmAct {
     this.continuePlaying = false
   }
 
-  onButtonPress(sound){
+  async onButtonPress(sound){
     this.continuePlaying = false
 
-    const feedbackPromise = new Promise(resolve => {
+    const weatherSummary = await this.weatherPromise
+    const ttsPath = await tts(`The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${weatherSummary}`)
+
+    await new Promise(resolve => {
       sound.newSource(successSound)
       sound.on('close', resolve)
     })
 
-    Promise.all([this.ttsPromise, feedbackPromise])
-    .then(([path]) => new Promise(resolve => {
-      sound.newSource(path, 'local')
+    new Promise(resolve => {
+      sound.newSource(ttsPath, 'local')
       sound.on('close', resolve)
-    }))
+    })
     .then(() => this.end())
     .catch(err => console.error(err))
   }
