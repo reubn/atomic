@@ -1,12 +1,11 @@
-import Player from 'node-omxplayer'
-
+import Sound from '../Sound'
 import Display from '../Display'
 
 class Manager {
-  constructor({player=[], display=[]}){
+  constructor({sound=[], display=[]}){
     this.currentAct = null
 
-    this.player = new Player(...player)
+    this.sound = new Sound(...sound)
     this.display = new Display(...display)
   }
 
@@ -15,7 +14,7 @@ class Manager {
 
     const outputs = {
       display: this.display,
-      player: this.player
+      sound: this.sound
     }
 
     act.start(outputs, next => (next ? this.connect(next) : this.disconnect(act)))
@@ -27,7 +26,7 @@ class Manager {
     if(act === this.currentAct){
       this.currentAct.end(true)
 
-      if(this.player.running) this.player.pause()
+      if(this.sound.running) this.sound.pause()
       this.display.reset()
 
       this.currentView = null

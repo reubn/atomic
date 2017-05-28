@@ -19,13 +19,13 @@ class AlarmAct {
     this.index = 0
   }
 
-  start({display, player}, end){
+  start({display, sound}, end){
     this.endHandle = end
 
-    // Player
+    // Sound
     this.continuePlaying = true
-    player.newSource(alarmSound, 'local')
-    player.on('close', () => this.continuePlaying && player.newSource(alarmSound, 'local'))
+    sound.newSource(alarmSound)
+    sound.on('close', () => this.continuePlaying && sound.newSource(alarmSound, 'local'))
 
     // Display
     display.setIntensity(16)
