@@ -1,6 +1,7 @@
 import moment from 'moment'
 
 import button, {press} from '../button'
+import {tapSound} from '../Sound'
 
 import {renderText} from '../Display'
 
@@ -12,12 +13,15 @@ class ClockAct {
     this.alternateEvenOdd = 0
   }
 
-  start({display}){
+  start({display, sound}){
     this.render(display)
     this.timer = setInterval(() => this.render(display), 500)
 
     // Button Events
-    this.buttonHandler = () => this.toggleSeconds()
+    this.buttonHandler = () => {
+      sound.newSource(tapSound)
+      this.toggleSeconds()
+    }
     button.on(press, this.buttonHandler)
   }
   end(){
