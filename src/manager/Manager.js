@@ -1,4 +1,4 @@
-import Player from 'mplayer'
+import Player from 'node-omxplayer'
 
 import Display from '../Display'
 
@@ -27,7 +27,7 @@ class Manager {
     if(act === this.currentAct){
       this.currentAct.end(true)
 
-      this.player.stop()
+      if(this.player.running) this.player.pause()
       this.display.reset()
 
       this.currentView = null
