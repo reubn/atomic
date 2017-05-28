@@ -1,3 +1,3 @@
-import initAlarms from './alarm'
+import initAlarms from './alarms'
 
 initAlarms()
