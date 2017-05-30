@@ -10,7 +10,7 @@ const init = async () => {
   await Alarm.clearAll()
 
   const {hours: hour, minutes: minute, seconds: second} = moment().add(5, 's').toObject()
-  //const [hour, minute, second] = [7, 30, 0]
+  // const [hour, minute, second] = [7, 30, 0]
 
   const testAlarm = new Alarm({
     name: 'Test 1',
