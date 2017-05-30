@@ -31,6 +31,7 @@ class AlarmAct {
     // Button Events
     button.once(press, () => this.onButtonPress(sound))
   }
+
   end(fromDisplayManager=false){
     if(!fromDisplayManager) return this.endHandle(new SummaryAct())
 

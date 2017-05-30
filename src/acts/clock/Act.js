@@ -24,12 +24,14 @@ class ClockAct {
     }
     button.on(press, this.buttonHandler)
   }
+  
   end(){
     clearInterval(this.timer)
     button.removeListener(press, this.buttonHandler)
     this.seconds = false
     this.alternateEvenOdd = 0
   }
+
   toggleSeconds(){this.seconds = !this.seconds}
 
   render(display){

@@ -32,6 +32,7 @@ class SummaryAct {
     sound.newSource(ttsPath)
     sound.on('close', () => this.end())
   }
+
   end(fromDisplayManager=false){
     if(!fromDisplayManager) return this.endHandle(clockAct)
 
