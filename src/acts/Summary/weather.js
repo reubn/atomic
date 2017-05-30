@@ -9,6 +9,8 @@ export default async () => {
   const todaysForecasts = json.data.list
     .filter(({dt}) => moment.unix(dt).isBetween(moment().startOf('d'), moment().endOf('d')))
 
+  if(!todaysForecasts.length) return {weatherSummary: '', displayTemp: null}
+
   const {avTemps: averageTemps, max: maxTemp, min: minTemp, descs: descriptions} = todaysForecasts
     .reduce(({avTemps=[], max=-Infinity, min=Infinity, descs=[]}, {weather: [{description}], main: {temp, temp_max, temp_min}}) => ({
       avTemps: [...avTemps, temp],
@@ -17,7 +19,7 @@ export default async () => {
       descs: [...descs, ...(descs.includes(description) ? [] : [description])]
     }), {})
 
-  const descriptionsString = descriptions.reduce((string, desc, index, {length}) => `${string} ${(index === length - 1) ? 'and' : ','} ${desc}`)
+  const descriptionsString = descriptions.reduce((string, desc, index, {length}) => `${string} ${(index === length - 1) ? 'and' : ','} ${desc}`, '')
 
   const averageTempRounded = Math.round(averageTemps.reduce((t, s) => t + s, 0) / todaysForecasts.length)
   const maxTempRounded = Math.round(maxTemp)
