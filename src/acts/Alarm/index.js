@@ -21,7 +21,9 @@ class AlarmAct {
     // Sound
     this.continuePlaying = true
     sound.newSource(alarmSound)
-    sound.on('close', () => this.continuePlaying && sound.newSource(alarmSound))
+
+    const closeHandler = () => (this.continuePlaying ? sound.newSource(alarmSound) : sound.removeListener('close', closeHandler))
+    sound.on('close', closeHandler)
 
     // Display
     display.setIntensity(16)
@@ -45,7 +47,7 @@ class AlarmAct {
 
     new Promise(resolve => {
       sound.newSource(successSound)
-      sound.on('close', resolve)
+      sound.once('close', resolve)
     })
     .then(() => this.end())
     .catch(err => console.error(err))

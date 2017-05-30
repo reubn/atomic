@@ -30,7 +30,7 @@ class SummaryAct {
     const ttsPath = await tts(`The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${weatherSummary}`)
 
     sound.newSource(ttsPath)
-    sound.on('close', () => this.end())
+    sound.once('close', () => this.end())
   }
 
   end(fromDisplayManager=false){
