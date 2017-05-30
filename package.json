@@ -32,6 +32,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "babel-polyfill": "^6.23.0",
+    "eventemitter3": "^2.0.3",
     "google-tts-api": "^0.0.1",
     "lame": "^1.2.4",
     "moment": "^2.18.1",
