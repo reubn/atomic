@@ -15,7 +15,7 @@ export default class Sound extends EventEmitter {
 
     this.currentMode = null
 
-    this.loopStates = new Set()
+    this.loopStates = new Map()
   }
 
   hasEnded(){
@@ -63,22 +63,16 @@ export default class Sound extends EventEmitter {
     return this.createEndPromise()
   }
 
-  slowLoop(path, {volumeLevel, symbol=Symbol(path)}={}){
-    let resolveStatus = false
-    let hoistedResolve = () => (resolveStatus = true)
-
-
-    this.loopStates.add(symbol)
+  slowLoop(path, {volumeLevel, symbol=Symbol(path), root=true}={}){
+    if(root) this.loopStates.set(symbol, null)
 
     this.slowPlay(path, {volumeLevel})
-    .then(() => (this.loopStates.has(symbol) ? this.slowLoop(path, {volumeLevel, symbol}) : hoistedResolve()))
+    .then(() => {
+      if(!this.loopStates.get(symbol)) this.slowLoop(path, {volumeLevel, symbol, root: false})
+      else this.loopStates.get(symbol)()
+    })
 
-    return async () => {
-      const hoistPromise = new Promise(resolve => (resolveStatus ? resolve() : (hoistedResolve = resolve)))
-      this.loopStates.delete(symbol)
-
-      return hoistPromise
-    }
+    return () => new Promise(resolve => this.loopStates.set(symbol, resolve))
   }
 }
 
