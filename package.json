@@ -38,9 +38,11 @@
     "nedb": "^1.8.0",
     "node-omxplayer": "^0.4.1",
     "node-schedule": "^1.2.3",
+    "pcm-volume": "^1.0.0",
     "pi-spi": "^1.0.1",
     "rpio": "^0.9.16",
     "source-map-support": "^0.4.15",
+    "speaker": "^0.3.0",
     "tmp": "^0.0.31",
     "wav": "^1.0.1"
   }

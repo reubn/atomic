@@ -16,15 +16,16 @@ class ClockAct {
   start({display, sound}){
     this.render(display)
     this.timer = setInterval(() => this.render(display), 500)
-
     // Button Events
     this.buttonHandler = () => {
-      sound.newSource(tapSound)
       this.toggleSeconds()
+      this.render(display)
+
+      sound.quickPlay(tapSound, 10)
     }
     button.on(press, this.buttonHandler)
   }
-  
+
   end(){
     clearInterval(this.timer)
     button.removeListener(press, this.buttonHandler)

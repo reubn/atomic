@@ -10,8 +10,6 @@ class AlarmAct {
     this.timer = null
     this.endHandle = null
 
-    this.continuePlaying = false
-
     this.index = 0
   }
 
@@ -19,11 +17,7 @@ class AlarmAct {
     this.endHandle = end
 
     // Sound
-    this.continuePlaying = true
-    sound.newSource(alarmSound)
-
-    const closeHandler = () => (this.continuePlaying ? sound.newSource(alarmSound) : sound.removeListener('close', closeHandler))
-    sound.on('close', closeHandler)
+    const callToCancel = sound.slowLoop(alarmSound)
 
     // Display
     display.setIntensity(16)
@@ -31,7 +25,7 @@ class AlarmAct {
     this.timer = setInterval(() => this.render(display), 500)
 
     // Button Events
-    button.once(press, () => this.onButtonPress(sound))
+    button.once(press, () => this.onButtonPress(sound, callToCancel))
   }
 
   end(fromDisplayManager=false){
@@ -39,18 +33,13 @@ class AlarmAct {
 
     clearInterval(this.timer)
     this.endHandle = null
-    this.continuePlaying = false
   }
 
-  onButtonPress(sound){
-    this.continuePlaying = false
+  async onButtonPress(sound, callToCancel){
+    await callToCancel()
+    await sound.quickPlay(successSound, {volumeLevel: 15})
 
-    new Promise(resolve => {
-      sound.newSource(successSound)
-      sound.once('close', resolve)
-    })
-    .then(() => this.end())
-    .catch(err => console.error(err))
+    this.end()
   }
 
   render(display){

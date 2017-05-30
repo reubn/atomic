@@ -1,4 +1,4 @@
-export {default} from 'node-omxplayer'
+export {default, end} from './Sound'
 
 export {default as tts} from './tts'
 
