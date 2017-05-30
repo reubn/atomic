@@ -64,14 +64,17 @@ export default class Sound extends EventEmitter {
   }
 
   slowLoop(path, {volumeLevel, symbol=Symbol(path)}={}){
-    let hoistedResolve
-    if(!this.loopStates.has(symbol)) this.loopStates.add(symbol)
+    let resolveStatus = false
+    let hoistedResolve = () => (resolveStatus = true)
+
+
+    this.loopStates.add(symbol)
 
     this.slowPlay(path, {volumeLevel})
     .then(() => (this.loopStates.has(symbol) ? this.slowLoop(path, {volumeLevel, symbol}) : hoistedResolve()))
 
     return async () => {
-      const hoistPromise = new Promise(resolve => hoistedResolve = resolve)
+      const hoistPromise = new Promise(resolve => (resolveStatus ? resolve() : (hoistedResolve = resolve)))
       this.loopStates.delete(symbol)
 
       return hoistPromise
