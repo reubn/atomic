@@ -2,7 +2,7 @@ import moment from 'moment'
 
 import clockAct from '../clock'
 import {renderText} from '../../Display'
-import {tts} from '../../Sound'
+import {tts, failureSound} from '../../Sound'
 
 import weather from './weather'
 
@@ -29,7 +29,8 @@ class SummaryAct {
     this.displayTemp = displayTemp
     const ttsPath = await tts(`The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${weatherSummary}`)
 
-    await sound.slowPlay(ttsPath)
+    if(ttsPath) await sound.slowPlay(ttsPath)
+    else await sound.slowPlay(failureSound)
     this.end()
   }
 
