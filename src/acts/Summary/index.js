@@ -27,7 +27,7 @@ class SummaryAct {
     const {displayTemp, weatherSummary} = await this.weatherPromise
 
     this.displayTemp = displayTemp
-    const ttsPath = await tts(`The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${weatherSummary}`)
+    const ttsPath = await tts({text: `The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${weatherSummary}`, lang: 'en-au'})
 
     if(ttsPath) await sound.slowPlay(ttsPath)
     else await sound.slowPlay(failureSound)
