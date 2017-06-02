@@ -1,5 +1,6 @@
 export {default, end} from './Sound'
 
+export {default as lame2PCM} from './lame2PCM'
 export {default as tts} from './tts'
 
 export {default as successSound} from './sounds/success.wav'
