@@ -45,7 +45,6 @@
     "source-map-support": "^0.4.15",
     "speaker": "^0.3.0",
     "stream-array": "^1.1.2",
-    "stream-to-array": "^2.3.0",
-    "wav": "^1.0.1"
+    "stream-to-array": "^2.3.0"
   }
 }
