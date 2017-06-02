@@ -27,7 +27,7 @@ module.exports = env => {
           exclude: /node_modules/
         },
         {
-          test: /\.wav$/,
+          test: /\.(wav|pcm)$/,
           use: 'file-loader'
         }
       ]

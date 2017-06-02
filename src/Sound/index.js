@@ -1,10 +1,31 @@
+import fs from 'fs'
+
+import successPath from './sounds/success.pcm'
+import failurePath from './sounds/failure.pcm'
+import tapPath from './sounds/tap.pcm'
+import alarmPath from './sounds/alarm.pcm'
+import radiatePath from './sounds/radiate.pcm'
+
+const defaultFormat = {
+  bitDepth: 16,         // 16-bit samples
+  sampleRate: 44100     // 44,100 Hz sample rate
+}
+
+const successSound = () => ({format: {...defaultFormat, channels: 1}, stream: fs.createReadStream(successPath)})
+const failureSound = () => ({format: {...defaultFormat, channels: 1}, stream: fs.createReadStream(failurePath)})
+const tapSound = () => ({format: {...defaultFormat, channels: 1}, stream: fs.createReadStream(tapPath)})
+const alarmSound = () => ({format: {...defaultFormat, channels: 2}, stream: fs.createReadStream(alarmPath)})
+const radiateSound = () => ({format: {...defaultFormat, channels: 2}, stream: fs.createReadStream(radiatePath)})
+
+export {
+  successSound,
+  failureSound,
+  tapSound,
+  alarmSound,
+  radiateSound
+}
+
 export {default, end} from './Sound'
 
 export {default as lame2PCM} from './lame2PCM'
 export {default as tts} from './tts'
-
-export {default as successSound} from './sounds/success.wav'
-export {default as failureSound} from './sounds/failure.wav'
-export {default as tapSound} from './sounds/tap.wav'
-export {default as alarmSound} from './sounds/alarm.wav'
-export {default as radiateSound} from './sounds/radiate.wav'
