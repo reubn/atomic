@@ -46,7 +46,7 @@ export default class Sound extends EventEmitter {
     const speaker = new Speaker(format)
     stream.pipe(speaker)
 
-    return new Promise(resolve => speaker.on('close', () => this.emit(end) && resolve()))
+    return new Promise(resolve => speaker.on('close', () => {this.emit(end); resolve()}))
   }
 
   loop(soundDescription, {volumeLevel=100}={}){
@@ -70,7 +70,7 @@ export default class Sound extends EventEmitter {
       loopStream.unpipe()
       speaker.end()
 
-      return new Promise(resolve => speaker.on('close', () => this.emit(end) && resolve()))
+      return new Promise(resolve => speaker.on('close', () => {this.emit(end); resolve()}))
     }
   }
 }
