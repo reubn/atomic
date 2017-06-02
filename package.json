@@ -34,7 +34,9 @@
     "babel-polyfill": "^6.23.0",
     "eventemitter3": "^2.0.3",
     "lame": "^1.2.4",
+    "loudness": "^0.2.2",
     "moment": "^2.18.1",
+    "multistream": "^2.1.0",
     "nedb": "^1.8.0",
     "node-omxplayer": "^0.4.1",
     "node-schedule": "^1.2.3",
@@ -44,7 +46,8 @@
     "safe-eval": "^0.3.0",
     "source-map-support": "^0.4.15",
     "speaker": "^0.3.0",
-    "tmp": "^0.0.31",
+    "stream-array": "^1.1.2",
+    "stream-to-array": "^2.3.0",
     "wav": "^1.0.1"
   }
 }

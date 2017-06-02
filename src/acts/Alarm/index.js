@@ -17,7 +17,7 @@ class AlarmAct {
     this.endHandle = end
 
     // Sound
-    const callToCancel = sound.slowLoop(alarmSound)
+    const callToCancel = sound.loop(alarmSound)
 
     // Display
     display.setIntensity(16)
@@ -37,7 +37,7 @@ class AlarmAct {
 
   async onButtonPress(sound, callToCancel){
     await callToCancel()
-    await sound.quickPlay(successSound, {volumeLevel: 15})
+    await sound.play(successSound)
 
     this.end()
   }

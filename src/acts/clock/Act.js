@@ -21,7 +21,7 @@ class ClockAct {
       this.toggleSeconds()
       this.render(display)
 
-      sound.quickPlay(tapSound, 10)
+      sound.play(tapSound)
     }
     button.on(press, this.buttonHandler)
   }

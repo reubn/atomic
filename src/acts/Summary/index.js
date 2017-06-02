@@ -27,10 +27,10 @@ class SummaryAct {
     const {displayTemp, weatherSummary} = await this.weatherPromise
 
     this.displayTemp = displayTemp
-    const ttsPath = await tts({text: `The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${weatherSummary}`, lang: 'en-au'})
+    const ttsStreamAndFormat = await tts({text: `The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${weatherSummary}`, lang: 'en-au'})
 
-    if(ttsPath) await sound.slowPlay(ttsPath)
-    else await sound.slowPlay(failureSound)
+    if(ttsStreamAndFormat) await sound.play(ttsStreamAndFormat)
+    else await sound.play(failureSound)
     this.end()
   }
 

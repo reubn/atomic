@@ -1,11 +1,9 @@
 import EventEmitter from 'eventemitter3'
-import fs from 'fs'
-
+import streamToArray from 'stream-to-array'
+import arrayToStream from 'stream-array'
+import multistream from 'multistream'
 import Speaker from 'speaker'
-import {Reader as WavReader} from 'wav'
-import Volume from 'pcm-volume'
-
-import Omx from 'node-omxplayer'
+import loudness from 'loudness'
 
 const end = Symbol('end')
 
@@ -13,66 +11,67 @@ export default class Sound extends EventEmitter {
   constructor(){
     super()
 
-    this.currentMode = null
+    this.volume = null
 
     this.loopStates = new Map()
-  }
-
-  hasEnded(){
-    this.currentMode = null
-    this.emit(end)
   }
 
   async createEndPromise(){
     return new Promise(resolve => this.once(end, resolve))
   }
 
-  async slowPlay(path, {volumeLevel}={}){
-    if(this.currentMode) throw new Error('Player Busy')
+  async getVolume(){
+    return this.volume !== null ? this.volume : new Promise((resolve, reject) => loudness.getVolume((err, volume) => {
+      if(err) reject(err)
 
-    this.currentMode = 'omx'
-
-    const omx = new Omx()
-    omx.newSource(path, undefined, undefined, volumeLevel)
-    omx.once('close', () => this.hasEnded())
-
-    return this.createEndPromise()
+      this.volume = volume
+      resolve(volume)
+    }))
   }
 
-  async quickPlay(path, {volumeLevel=1}={}){
-    if(this.currentMode) throw new Error('Player Busy')
+  async setVolume(volume=100){
+    if(await this.getVolume() === volume) return
 
-    this.currentMode = 'speaker'
-
-    const volume = new Volume(volumeLevel)
-    const reader = new WavReader()
-
-    // pipe the WAVE file to the Reader instance
-    fs.createReadStream(path).pipe(reader)
-
-    // the "format" event gets emitted at the end of the WAVE header
-    reader.on('format', format => {
-      // the WAVE header is stripped from the output of the reader
-      const speaker = new Speaker(format)
-      reader.pipe(volume)
-      volume.pipe(speaker)
-
-      speaker.on('close', () => this.hasEnded())
-    })
-
-    return this.createEndPromise()
+    this.volume = volume
+    return new Promise((resolve, reject) => loudness.setVolume(volume, err => (err ? reject(err) : resolve())))
   }
 
-  slowLoop(path, {volumeLevel, symbol=Symbol(path), root=true}={}){
-    if(root) this.loopStates.set(symbol, null)
+  async play(soundDescription, {volumeLevel=100}={}){
+    const {format, stream} = soundDescription()
+    if(!format) throw new Error('Format Required')
+    if(!stream) throw new Error('Stream Required')
 
-    this.slowPlay(path, {volumeLevel})
-    .then(() => {
-      if(!this.loopStates.get(symbol)) this.slowLoop(path, {volumeLevel, symbol, root: false})
-      else this.loopStates.get(symbol)()
+    await this.setVolume(volumeLevel)
+
+    const speaker = new Speaker(format)
+    stream.pipe(speaker)
+
+    return new Promise(resolve => speaker.on('close', () => this.emit(end) && resolve()))
+  }
+
+  loop(soundDescription, {volumeLevel=100}={}){
+    const {format, stream} = soundDescription()
+    if(!format) throw new Error('Format Required')
+    if(!stream) throw new Error('Stream Required')
+
+    const speaker = new Speaker(format)
+    let continuePlaying = true
+    let loopStream = null
+
+    this.setVolume(volumeLevel)
+    .then(() => streamToArray(stream))
+    .then(arrayData => {
+      loopStream = multistream(cb => cb(null, (continuePlaying === true) ? arrayToStream(arrayData) : null))
+      loopStream.pipe(speaker)
     })
 
-    return () => new Promise(resolve => this.loopStates.set(symbol, resolve))
+    return async () => {
+      continuePlaying = false
+      loopStream.unpipe()
+      speaker.end()
+
+      return new Promise(resolve => speaker.on('close', () => this.emit(end) && resolve()))
+    }
   }
 }
 
