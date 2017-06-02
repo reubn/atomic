@@ -5,5 +5,5 @@ import getMp3 from './getMp3'
 export default async (_, {text=_, lang='en', speed=1}=_) => {
   const mp3 = await getMp3({text, lang, speed})
 
-  return lame2PCM(mp3)
+  return mp3 ? lame2PCM(mp3) : null
 }
