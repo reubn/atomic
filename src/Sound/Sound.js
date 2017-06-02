@@ -57,7 +57,7 @@ export default class Sound extends EventEmitter {
       reader.pipe(volume)
       volume.pipe(speaker)
 
-      this.hasEnded()
+      speaker.on('close', () => this.hasEnded())
     })
 
     return this.createEndPromise()
