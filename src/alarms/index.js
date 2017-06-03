@@ -9,7 +9,7 @@ import Alarm from './Alarm'
 const init = async () => {
   await Alarm.clearAll()
 
-  const {hours: hour, minutes: minute, seconds: second} = moment().add(5, 's').toObject()
+  const {hours: hour, minutes: minute, seconds: second} = moment().add(2, 's').toObject()
   // const [hour, minute, second] = [7, 30, 0]
 
   const testAlarm = new Alarm({
