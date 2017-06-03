@@ -36,8 +36,8 @@ export default class Sound extends EventEmitter {
     return new Promise((resolve, reject) => loudness.setVolume(volume, err => (err ? reject(err) : resolve())))
   }
 
-  async play(soundDescription, {volumeLevel=100}={}){
-    const {format, stream} = soundDescription()
+  async play(desc, {volumeLevel=100}={}){
+    const {format, stream} = desc()
     if(!format) throw new Error('Format Required')
     if(!stream) throw new Error('Stream Required')
 
@@ -49,8 +49,8 @@ export default class Sound extends EventEmitter {
     return new Promise(resolve => speaker.on('close', () => {this.emit(end); resolve()}))
   }
 
-  loop(soundDescription, {volumeLevel=100}={}){
-    const {format, stream} = soundDescription()
+  loop(desc, {volumeLevel=100}={}){
+    const {format, stream} = desc()
     if(!format) throw new Error('Format Required')
     if(!stream) throw new Error('Stream Required')
 
