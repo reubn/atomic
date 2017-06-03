@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-import clockAct from '../clock'
+import ClockAct from '../Clock'
 import {renderText} from '../../Display'
 import {tts, failureSound} from '../../Sound'
 
@@ -35,7 +35,7 @@ class SummaryAct {
   }
 
   end(fromDisplayManager=false){
-    if(!fromDisplayManager) return this.endHandle(clockAct)
+    if(!fromDisplayManager) return this.endHandle(new ClockAct())
 
     clearInterval(this.timer)
     this.endHandle = null
