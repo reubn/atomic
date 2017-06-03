@@ -27,5 +27,5 @@ export {
 
 export {default, end} from './Sound'
 
-export {default as lame2PCM} from './lame2PCM'
+export {default as lame2desc} from './lame2desc'
 export {default as tts} from './tts'
