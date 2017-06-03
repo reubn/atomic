@@ -32,32 +32,22 @@ export default class Sound extends EventEmitter {
     return new Promise((resolve, reject) => loudness.setVolume(volume, err => (err ? reject(err) : resolve())))
   }
 
-  async play(desc, {volumeLevel=100}={}){
-    const {format, stream} = desc()
     if(!format) throw new Error('Format Required')
-    if(!stream) throw new Error('Stream Required')
 
     await this.setVolume(volumeLevel)
 
     const speaker = new Speaker(format)
-    stream.pipe(speaker)
 
     return new Promise(resolve => speaker.on('close', resolve))
   }
 
-  loop(desc, {volumeLevel=100}={}){
-    const {format, stream} = desc()
     if(!format) throw new Error('Format Required')
-    if(!stream) throw new Error('Stream Required')
 
     const speaker = new Speaker(format)
     let continuePlaying = true
     let loopStream = null
 
     this.setVolume(volumeLevel)
-    .then(() => streamToArray(stream))
-    .then(arrayData => {
-      loopStream = multistream(cb => cb(null, (continuePlaying === true) ? arrayToStream(arrayData) : null))
       loopStream.pipe(speaker)
     })
 

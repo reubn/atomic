@@ -44,7 +44,6 @@
     "safe-eval": "^0.3.0",
     "source-map-support": "^0.4.15",
     "speaker": "^0.3.0",
-    "stream-array": "^1.1.2",
-    "stream-to-array": "^2.3.0"
+    "stream-cache": "^0.0.2"
   }
 }
