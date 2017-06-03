@@ -16,10 +16,6 @@ export default class Sound extends EventEmitter {
     this.loopStates = new Map()
   }
 
-  async createEndPromise(){
-    return new Promise(resolve => this.once(end, resolve))
-  }
-
   async getVolume(){
     return this.volume !== null ? this.volume : new Promise((resolve, reject) => loudness.getVolume((err, volume) => {
       if(err) reject(err)
@@ -46,7 +42,7 @@ export default class Sound extends EventEmitter {
     const speaker = new Speaker(format)
     stream.pipe(speaker)
 
-    return new Promise(resolve => speaker.on('close', () => {this.emit(end); resolve()}))
+    return new Promise(resolve => speaker.on('close', resolve))
   }
 
   loop(desc, {volumeLevel=100}={}){
@@ -70,7 +66,7 @@ export default class Sound extends EventEmitter {
       loopStream.unpipe()
       speaker.end()
 
-      return new Promise(resolve => speaker.on('close', () => {this.emit(end); resolve()}))
+      return new Promise(resolve => speaker.on('close', resolve))
     }
   }
 }
