@@ -1,9 +1,8 @@
 import EventEmitter from 'eventemitter3'
-import streamToArray from 'stream-to-array'
-import arrayToStream from 'stream-array'
-import multistream from 'multistream'
 import Speaker from 'speaker'
 import loudness from 'loudness'
+
+import ReplayableStream from './ReplayableStream'
 
 const end = Symbol('end')
 
@@ -32,28 +31,29 @@ export default class Sound extends EventEmitter {
     return new Promise((resolve, reject) => loudness.setVolume(volume, err => (err ? reject(err) : resolve())))
   }
 
+  async play({format, stream={}}, {volumeLevel=100}={}){
     if(!format) throw new Error('Format Required')
+    if(!(stream instanceof ReplayableStream)) throw new Error('ReplayableStream Required')
 
     await this.setVolume(volumeLevel)
 
     const speaker = new Speaker(format)
+    stream.flow().pipe(speaker)
 
     return new Promise(resolve => speaker.on('close', resolve))
   }
 
+  loop({format, stream={}}, {volumeLevel=100}={}){
     if(!format) throw new Error('Format Required')
+    if(!(stream instanceof ReplayableStream)) throw new Error('ReplayableStream Required')
 
     const speaker = new Speaker(format)
-    let continuePlaying = true
-    let loopStream = null
 
     this.setVolume(volumeLevel)
-      loopStream.pipe(speaker)
-    })
+    .then(() => stream.loop().pipe(speaker))
 
     return async () => {
-      continuePlaying = false
-      loopStream.unpipe()
+      stream.cap()
       speaker.end()
 
       return new Promise(resolve => speaker.on('close', resolve))
