@@ -4,9 +4,7 @@ export default (text, displayWidth, displayHeight, contrastMode=false) => {
   const contrastedFont = font(contrastMode)
 
   const setLetters = [...text].reduce((cols, char) => {
-    if(!contrastedFont[char]) return cols
-
-    const shape = contrastedFont[char]
+    const shape = contrastedFont[char] || contrastedFont[char.toLowerCase()] || contrastedFont['?']
     return !cols ? shape : [...cols, Array(shape[0].length).fill(contrastMode), ...shape]
   }, null)
 
