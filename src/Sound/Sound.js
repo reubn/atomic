@@ -48,12 +48,13 @@ export default class Sound extends EventEmitter {
     if(!(stream instanceof ReplayableStream)) throw new Error('ReplayableStream Required')
 
     const speaker = new Speaker(format)
+    const loopStream = stream.loop()
 
     this.setVolume(volumeLevel)
-    .then(() => stream.loop().pipe(speaker))
+    .then(() => loopStream.pipe(speaker))
 
     return async () => {
-      stream.cap()
+      stream.cap(loopStream)
       speaker.end()
 
       return new Promise(resolve => speaker.on('close', resolve))
