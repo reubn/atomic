@@ -43,7 +43,7 @@ class AlarmAct {
   }
 
   render(display){
-    display.display2DArray(renderText('alarm', display.width, display.height, this.index % 2))
+    display.display2DArray(renderText(this.alarm.name, display.width, display.height, this.index % 2))
 
     this.index++
   }
