@@ -1,7 +1,7 @@
 import button, {press} from '../../button'
 import SummaryAct from '../Summary'
 import {renderText} from '../../Display'
-import {alarmSound, successSound} from '../../Sound'
+import {radiateSound, successSound} from '../../Sound'
 
 class AlarmAct {
   constructor(alarm){
@@ -17,7 +17,7 @@ class AlarmAct {
     this.endHandle = end
 
     // Sound
-    const callToCancel = sound.loop(alarmSound)
+    const callToCancel = sound.loop(radiateSound)
 
     // Display
     display.setIntensity(16)
