@@ -3,4 +3,5 @@ import wifi from './wifi'
 import server from './server'
 
 initAlarms()
+wifi()
 server()

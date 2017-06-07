@@ -1,36 +1,25 @@
 import {getStatus} from './wifi'
 
-export default (maxAttempts, interval) =>
-  new Promise(function(resolve, reject){
-    let attempts = 0
+const waitForWifi = async (attemptsLeft, interval) => {
+  console.log('Attempts Left', attemptsLeft)
+  if(!attemptsLeft) return false
 
-    function retryOrGiveUp(){
-      if(attempts >= maxAttempts){
-        console.error('Giving up. No wifi available.')
-        reject()
-      } else {
-        setTimeout(check, interval)
-      }
-    }
+  const retry = () => new Promise(resolve => setTimeout(() => resolve(waitForWifi(attemptsLeft - 1, interval)), interval))
+  const status = await getStatus().catch(() => 'ERROR')
 
-    function check(){
-      attempts++
-      console.log('check', attempts)
-      getStatus()
-        .then(status => {
-          console.log(status)
-          if(status === 'COMPLETED'){
-            console.log('Wifi connection found')
-            resolve()
-          } else {
-            console.log('No wifi connection on attempt', attempts)
-            retryOrGiveUp()
-          }
-        })
-        .catch(err => {
-          console.error('Error checking wifi on attempt', attempts, ':', err)
-          retryOrGiveUp()
-        })
-    }
-    check()
-  })
+  console.log(status)
+  if(status === 'COMPLETED'){
+    console.log('Wifi connection found')
+    return true
+  }
+
+  if(status === 'ERROR'){
+    console.log('Attempt Error, retrying')
+    return retry()
+  }
+
+  console.log('No wifi connection on attempt')
+  return retry()
+}
+
+export default waitForWifi

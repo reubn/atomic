@@ -1,20 +1,13 @@
-import {startAP, stopAP, defineNetwork} from './wifi'
+import {startAP, stopAP} from './wifi'
+import waitForWifi from './waitForWifi'
 
-import {ssid, key} from './secure'
+export default async () => {
+  await stopAP().catch(() => false)
+  const connected = await waitForWifi(5, 5000)
 
-export default startAP()
-
-const http = require('http')
-
-const requestHandler = async (request, response) => {
-  console.log(request.url)
-  response.end('Ending AP')
-  await stopAP()
-  setTimeout(() => defineNetwork(ssid, key), 3000)
+  if(connected) console.log('We have Wifi!')
+  else {
+    console.log('We do NOT have Wifi, starting AP')
+    startAP()
+  }
 }
-
-const server = http.createServer(requestHandler)
-server.listen(80, '10.0.0.1', err => {
-  if(err) return console.log('something bad happened', err)
-  console.log('server is listening')
-})
