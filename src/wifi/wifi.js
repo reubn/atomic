@@ -1,5 +1,4 @@
 import run from './run'
-import platform from './platform'
 
 /*
  * Determine whether we have a wifi connection with the `wpa_cli
@@ -9,14 +8,14 @@ import platform from './platform'
  * there is a connection. There are other possible string values when
  * a connection is being established
  */
-const getStatus = () => run(platform.getStatus)
+export const getStatus = () => run("sudo wpa_cli -iwlan0 status | sed -n -e '/^wpa_state=/{s/wpa_state=//;p;q}'")
 
 /*
  * Determine the ssid of the wifi network we are connected to.
  * This function returns a Promise that resolves to a string.
  * The string will be empty if not connected.
  */
-const getConnectedNetwork = () => run(platform.getConnectedNetwork)
+export const getConnectedNetwork = () => run("sudo wpa_cli -iwlan0 status | sed -n -e '/^ssid=/{s/ssid=//;p;q}'")
 
 /*
  * Scan for available wifi networks using `iwlist wlan0 scan`.
@@ -32,14 +31,28 @@ const getConnectedNetwork = () => run(platform.getConnectedNetwork)
  * pass a number. If all attempts fail, the promise is resolved to
  * an empty array.
  */
-const scan = (numAttempts=1) =>
+const scanCommand = `iwlist wlan0 scan |\
+sed -n -e '
+export const /Quality=/,/ESSID =/H
+export const /ESSID =/{
+  g
+export const   s/^.*Quality=\\([0-9]\\+\\).*ESSID ="\\([^"]*\\)".*$/\\1\t\\2/
+  p
+  s/.*//
+  x
+}' |\
+sort -nr |\
+cut -f 2 |\
+sed -e '/^$/d;/\\x00/d'`
+
+export const scan = (numAttempts=1) =>
   new Promise(resolve => {
     let attempts = 0
 
     const tryScan = () => {
       attempts++
 
-      run(platform.scan)
+      run(scanCommand)
       .then(out => resolve(out.length ? out.split('\n') : []))
       .catch(err => {
         console.error('Scan attempt', attempts, 'failed:', err.message || err)
@@ -83,7 +96,7 @@ const scan = (numAttempts=1) =>
  * seconds to complete before the user will be able to see and connect
  * to the network.
  */
-const startAP = () => run(platform.startAP)
+export const startAP = () => run('sudo ifconfig wlan0 down; sudo wpa_cli terminate; sudo ifconfig wlan0 10.0.0.1; sudo systemctl start hostapd; sudo systemctl start udhcpd')
 
 /*
  * Like startAP(), but take the access point down, using platform-dependent
@@ -93,7 +106,7 @@ const startAP = () => run(platform.startAP)
  * this point, the AP should be in the process of stopping but may not
  * yet be completely down.
  */
-const stopAP = () => run(platform.stopAP)
+export const stopAP = () => run('sudo ifconfig wlan0 down; sudo wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf; sudo systemctl stop udhcpd; sudo systemctl stop hostapd; sudo ifconfig wlan0 0.0.0.0; sudo wpa_cli reconfigure')
 
 /*
  * This function uses wpa_cli to add the specified network ssid and password
@@ -104,8 +117,11 @@ const stopAP = () => run(platform.stopAP)
  * If the system is not connected to a wifi network, calling this
  * command with a valid ssid and password should cause it to connect.
  */
-const defineNetwork = (ssid, password) =>
-  run(password ? platform.defineNetwork : platform.defineOpenNetwork, {
+const closed = 'ID=`sudo wpa_cli -iwlan0 add_network` && sudo wpa_cli -iwlan0 set_network $ID ssid \\"$SSID\\" && sudo wpa_cli -iwlan0 set_network $ID psk \\"$PSK\\" && sudo wpa_cli -iwlan0 enable_network $ID && sudo wpa_cli -iwlan0 save_config'
+const open = 'ID=`sudo wpa_cli -iwlan0 add_network` && sudo wpa_cli -iwlan0 set_network $ID ssid \\"$SSID\\" && sudo wpa_cli -iwlan0 set_network $ID key_mgmt NONE && sudo wpa_cli -iwlan0 enable_network $ID && sudo wpa_cli -iwlan0 save_config'
+
+export const defineNetwork = (ssid, password) =>
+  run(password ? closed : open, {
     SSID: ssid,
     PSK: password
   })
@@ -113,8 +129,28 @@ const defineNetwork = (ssid, password) =>
 /*
  * Return a Promise that resolves to an array of known wifi network names
  */
-const getKnownNetworks = () =>
-  run(platform.getKnownNetworks)
+export const getKnownNetworks = () =>
+  run("wpa_cli -iwlan0 list_networks | sed -e '1d' | cut -f 2")
   .then(out => (out.length ? out.split('\n') : []))
 
-export {getStatus, getConnectedNetwork, scan, startAP, stopAP, defineNetwork, getKnownNetworks}
+export const waitForWifi = async (attemptsLeft, interval) => {
+  console.log('Attempts Left', attemptsLeft)
+  if(!attemptsLeft) return false
+
+  const retry = () => new Promise(resolve => setTimeout(() => resolve(waitForWifi(attemptsLeft - 1, interval)), interval))
+  const status = await getStatus().catch(() => 'ERROR')
+
+  console.log(status)
+  if(status === 'COMPLETED'){
+    console.log('Wifi connection found')
+    return true
+  }
+
+  if(status === 'ERROR'){
+    console.log('Attempt Error, retrying')
+    return retry()
+  }
+
+  console.log('No wifi connection on attempt')
+  return retry()
+}

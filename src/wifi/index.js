@@ -1,5 +1,4 @@
-import {startAP, stopAP} from './wifi'
-import waitForWifi from './waitForWifi'
+import {waitForWifi, startAP, stopAP} from './wifi'
 
 export default async () => {
   await stopAP().catch(() => false)
