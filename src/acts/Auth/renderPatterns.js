@@ -1,6 +1,6 @@
-export default (code, displayWidth, displayHeight, contrastMode=false) => {
-  const setPatterns = code.reduce((cols, {pattern}) => {
-    const blankVertical = Array(pattern[0].length + 4).fill().map((_, i, {length}) => (!i || i === length - 1) ? contrastMode : false)
+export default (patterns, displayWidth, displayHeight, contrastMode=false) => {
+  const setPatterns = patterns.reduce((cols, {pattern}) => {
+    const blankVertical = Array(pattern[0].length + 4).fill().map((_, i, {length}) => ((!i || i === length - 1) ? contrastMode : false))
     const altVertical = Array(pattern[0].length + 4).fill(contrastMode)
 
     return [...cols, altVertical, blankVertical, ...pattern.map(small => [contrastMode, false, ...small, false, contrastMode]), blankVertical, altVertical]

@@ -1,12 +1,11 @@
 import button, {press} from '../../button'
+import auth from '../../auth'
 
-import generateCodes from './generateCodes'
-import renderCodes from './renderCodes'
+import renderPatterns from './renderPatterns'
 
 class AuthAct {
   constructor(){
     this.timer = null
-    this.codes = generateCodes(4)
   }
 
   start({display}){
@@ -14,7 +13,7 @@ class AuthAct {
     this.timer = setInterval(() => this.render(display), 250)
 
     this.buttonHandler = () => {
-      this.codes = generateCodes(4)
+      auth.generatePatterns()
       this.render(display)
     }
     button.on(press, this.buttonHandler)
@@ -26,7 +25,7 @@ class AuthAct {
   }
 
   render(display){
-    display.display2DArray(renderCodes(this.codes, display.width, display.height, true))
+    display.display2DArray(renderPatterns(auth.patterns, display.width, display.height, true))
   }
 }
 
