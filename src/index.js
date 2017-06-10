@@ -1,7 +1,7 @@
 import initAlarms from './alarms'
-import wifi from './wifi'
-import server from './server'
+import initWifi from './wifi'
+import initServer from './server'
 
 initAlarms()
-wifi()
-server()
+initWifi()
+initServer()
