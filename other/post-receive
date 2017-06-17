@@ -1,0 +1,17 @@
+#!/bin/sh
+
+DEPLOYDIR=../app
+
+GIT_WORK_TREE="$DEPLOYDIR" git checkout -f
+
+cd "$DEPLOYDIR"
+
+yarn install --prod
+
+echo “✅  atomic_dev Updated”
+echo “🌀  Restarting atomic_dev”
+
+tmux send-keys -t atomic_dev C-c
+tmux send-keys -t atomic_dev 'sudo ./start' Enter
+
+echo “🌈 🌈 🌈 DONE 🌈 🌈 🌈”
