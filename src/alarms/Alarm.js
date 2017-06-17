@@ -1,4 +1,5 @@
 import Datastore from 'nedb'
+import moment from 'moment'
 import {scheduleJob} from 'node-schedule'
 
 import storeDir from '../store'
@@ -6,7 +7,7 @@ import storeDir from '../store'
 const store = new Datastore({filename: `${storeDir}/alarms`, autoload: true})
 
 class Alarm {
-  constructor({_id, name='Alarm', scheduleDescriptor, lastRun}){
+  constructor({_id, name='Alarm', scheduleDescriptor, lastRun=null}){
     this.id = _id
     this.name = name
     this.scheduleDescriptor = scheduleDescriptor
@@ -37,7 +38,14 @@ class Alarm {
   }
 
   schedule(handler){
-    if(!this.isScheduled) this.scheduledJob = scheduleJob(this.scheduleDescriptor, () => handler(this))
+    if(!this.isScheduled) this.scheduledJob = scheduleJob(this.scheduleDescriptor, () => {
+      // Update lastRun
+      this.lastRun = moment()
+      this.save()
+
+      // Run handler
+      handler(this)
+    })
 
     return this
   }
@@ -46,7 +54,8 @@ class Alarm {
     return {
       _id: this.id,
       name: this.name,
-      scheduleDescriptor: this.scheduleDescriptor
+      scheduleDescriptor: this.scheduleDescriptor,
+      lastRun: this.lastRun ? this.lastRun.unix() : null
     }
   }
 
