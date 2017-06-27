@@ -12,6 +12,6 @@ echo “✅  atomic_dev Updated”
 echo “🌀  Restarting atomic_dev”
 
 tmux send-keys -t atomic_dev C-c
-tmux send-keys -t atomic_dev 'sudo ./start' Enter
+tmux send-keys -t atomic_dev './start' Enter
 
 echo “🌈 🌈 🌈 DONE 🌈 🌈 🌈”
