@@ -1,0 +1,8 @@
+#!/bin/bash
+echo '✨  Starting tmux session atomic_dev'
+
+tmux new -d -s atomic_dev
+tmux set-option -t atomic_dev set-remain-on-exit on
+tmux send-keys -t atomic_dev 'cd atomic_dev && ./start' Enter
+
+if tmux has-session atomic_dev; then echo '👌🏽  Success'; else echo '👎🏽  Failure'; fi

@@ -16,7 +16,8 @@
 **Directory Structure**
 - `mkdir atomic_dev`
 - `cd atomic_dev`
-- Transfer start script to `atomic_dev`
+- Transfer `start` to `atomic_dev`
+- Transfer `boot` to `atomic_dev`
 - `mkdir repo`
 - `mkdir app`
 
@@ -42,3 +43,8 @@
 - Transfer `udhcpd.conf` to `/etc/udhcpd.conf`
 - Add ```ctrl_interface=/var/run/wpa_supplicant
 update_config=1``` to `/etc/wpa_supplicant/wpa_supplicant.conf`
+
+**Run on Boot**
+- Transfer `atomic_dev.service` to `/lib/systemd/system`
+- `sudo systemctl enable atomic_dev`
+- `sudo systemctl start atomic_dev`

@@ -1,0 +1,16 @@
+[Unit]
+Description=⚗  atomic_dev tmux boot service
+After=network.target
+
+[Service]
+Type=oneshot
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=/home/pi/atomic_dev/boot
+StandardOutput=journal
+Restart=no
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
+Alias=atomic_dev.service
