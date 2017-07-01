@@ -3,6 +3,7 @@ import fs from 'fs'
 import ReplayableStream from './ReplayableStream'
 
 import successPath from './sounds/success.pcm'
+import bootPath from './sounds/boot.pcm'
 import failurePath from './sounds/failure.pcm'
 import tapPath from './sounds/tap.pcm'
 import alarmPath from './sounds/alarm.pcm'
@@ -14,6 +15,7 @@ const defaultFormat = {
 }
 
 const successSound = {format: {...defaultFormat, channels: 1}, stream: new ReplayableStream(fs.createReadStream(successPath))}
+const bootSound = {format: {...defaultFormat, channels: 2}, stream: new ReplayableStream(fs.createReadStream(bootPath))}
 const failureSound = {format: {...defaultFormat, channels: 1}, stream: new ReplayableStream(fs.createReadStream(failurePath))}
 const tapSound = {format: {...defaultFormat, channels: 1}, stream: new ReplayableStream(fs.createReadStream(tapPath))}
 const alarmSound = {format: {...defaultFormat, channels: 2}, stream: new ReplayableStream(fs.createReadStream(alarmPath))}
@@ -21,6 +23,7 @@ const radiateSound = {format: {...defaultFormat, channels: 2}, stream: new Repla
 
 export {
   successSound,
+  bootSound,
   failureSound,
   tapSound,
   alarmSound,
