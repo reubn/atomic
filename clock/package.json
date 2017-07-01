@@ -1,9 +1,6 @@
 {
-  "name": "Atomic",
-  "version": "0.0.1",
-  "main": "index.js",
-  "author": "Reuben Eggar",
-  "license": "MIT",
+  "name": "Clock",
+  "version": "0.0.0",
   "scripts": {
     "build:dev": "webpack --env=development && yarn copy",
     "build": "webpack --env=production && yarn copy",
@@ -12,19 +9,8 @@
     "buildDeploy": "yarn build:dev && yarn deploy"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.1",
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^7.2.2",
     "babel-loader": "^7.0.0",
-    "babel-preset-env": "^1.5.1",
-    "babel-preset-stage-0": "^6.24.1",
     "babili-webpack-plugin": "^0.1.1",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^15.0.1",
-    "eslint-plugin-import": "^2.3.0",
-    "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-react": "^7.0.1",
     "file-loader": "^0.11.1",
     "webpack": "^2.6.1",
     "webpack-node-externals": "^1.6.0"
