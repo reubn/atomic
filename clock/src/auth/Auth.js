@@ -53,6 +53,10 @@ export default class Auth {
     return new Promise((resolve, reject) => store.remove({key}, err => (err ? reject(err) : resolve())))
   }
 
+  async revokeAllTokens(){
+    return new Promise((resolve, reject) => store.remove({}, err => (err ? reject(err) : resolve())))
+  }
+
   async tokenIsValid(key){
     const token = await new Promise((resolve, reject) => store.findOne({key, expires: {$gte: moment().unix()}}, (err, documents) => (err ? reject(err) : resolve(documents))))
 
