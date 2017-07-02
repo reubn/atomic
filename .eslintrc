@@ -58,6 +58,7 @@
           "after": true
         }
       }
-    }]
+    }],
+    "react/jsx-filename-extension": 0
   }
 }

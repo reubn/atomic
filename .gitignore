@@ -3,3 +3,4 @@
 *dist
 *secure.js
 *.log
+.expo/
