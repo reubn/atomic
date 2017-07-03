@@ -2,11 +2,13 @@ import Sound from '../Sound'
 import Display from '../Display'
 
 class Manager {
-  constructor({sound=[], display=[]}){
+  constructor({sound=[], display=[]}, initalAct){
     this.currentAct = null
 
     this.sound = new Sound(...sound)
     this.display = new Display(...display)
+
+    if(initalAct) this.connect(initalAct)
   }
 
   connect(act){

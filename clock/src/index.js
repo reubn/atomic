@@ -4,11 +4,14 @@ import initServer from './server'
 import auth from './auth'
 import manager from './manager'
 import {bootSound} from './Sound'
+
+import AuthAct from './acts/Auth'
+
 manager.sound.play(bootSound)
 
 auth.validTokenExists()
 .then(result => result && initAlarms())
-.catch(() => null)
+.catch(() => manager.connect(new AuthAct()))
 
 initWifi()
 initServer()
