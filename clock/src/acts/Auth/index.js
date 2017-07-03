@@ -8,7 +8,10 @@ class AuthAct {
     this.timer = null
   }
 
-  start({display}){
+  start({display, previousAct}, end){
+    this.previousAct = previousAct
+    this.endHandle = end
+
     this.render(display)
     this.timer = setInterval(() => this.render(display), 250)
 
@@ -19,7 +22,9 @@ class AuthAct {
     button.on(press, this.buttonHandler)
   }
 
-  end(){
+  end(fromDisplayManager=false){
+    if(!fromDisplayManager) return this.endHandle(this.previousAct)
+
     clearInterval(this.timer)
     button.removeListener(press, this.buttonHandler)
   }

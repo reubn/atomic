@@ -14,7 +14,8 @@ class Manager {
 
     const outputs = {
       display: this.display,
-      sound: this.sound
+      sound: this.sound,
+      previousAct: this.currentAct
     }
 
     act.start(outputs, next => (next ? this.connect(next) : this.disconnect(act)))
