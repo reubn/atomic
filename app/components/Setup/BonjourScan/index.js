@@ -1,22 +1,31 @@
-import React from 'react'
-import {Text, View, ScrollView, Button} from 'react-native'
+import React, {Component} from 'react'
+import {Text, View, ScrollView} from 'react-native'
 
 import Logo from '../../Logo'
 
 import {container, scroll, scrollContainer, call, message} from './styles'
 
-export default ({navigation}) => (
-  <View style={container}>
-    <ScrollView style={scroll} contentContainerStyle={scrollContainer}>
-      <Text style={call}>Sacn!</Text>
-      <Text style={message}>Dpo it!</Text>
-    </ScrollView>
-  </View>
-)
+export default class Welcome extends Component {
+  static navigationOptions = {
+    title: 'Select Your Clock'
+  }
 
-export const options = ({navigation: {navigate}}) => {
-  return {
-    title: 'Select Your Clock',
-    headerLeft: null
+  componentDidMount(){
+    this.props.navigation.setParams(this.params)
+  }
+
+  params = {
+    next: 'Welcome'
+  }
+
+  render(){
+    return (
+      <View style={container}>
+        <ScrollView style={scroll} contentContainerStyle={scrollContainer}>
+          <Text style={call}>Scan!</Text>
+          <Text style={message}>Scan!!!</Text>
+        </ScrollView>
+      </View>
+    )
   }
 }

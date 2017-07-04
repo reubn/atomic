@@ -13,4 +13,4 @@ export const headerTitleStyle = {
   color: colours.blue.dark.caiman.toString()
 }
 
-export const rightButton = ({navigation: {navigate}}) => <Button title="Next" color={colours.blue.badger.toString()} onPress={() => navigate('BonjourScan')} />
+export const rightButton = ({navigation: {navigate, state: {params: {next}={}}={}}}) => <Button title="Next" color={colours.blue.badger.toString()} onPress={() => navigate(next)} />
