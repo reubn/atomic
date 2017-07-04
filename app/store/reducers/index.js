@@ -1,5 +1,11 @@
 import {combineReducers} from 'redux'
 
-const reducers = {}
+import bonjourScan from './bonjourScan'
+import clock from './clock'
+
+const reducers = {
+  bonjourScan,
+  clock
+}
 
 export default combineReducers(reducers)
