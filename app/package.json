@@ -14,7 +14,10 @@
     "react": "16.0.0-alpha.12",
     "react-native": "^0.45.1",
     "react-native-navbar": "^1.7.1",
-    "react-native-svg": "^5.2.0"
+    "react-native-svg": "^5.2.0",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "react-native-scripts": "0.0.40"
