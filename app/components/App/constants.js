@@ -7,7 +7,7 @@ export const colours = {
     get badger(){return this.base.rotate(16).darken(0.2).round()},
     get camel(){return this.base.rotate(2).darken(0.2).round()},
     dark: {
-      base: Color('hsl(224, 18%, 9%)'),
+      base: Color('hsl(224, 18%, 13%)'),
       get aardvark(){return this.base.rotate(-10).desaturate(0.08).lighten(0.06).round()},
       get baboon(){return this.base.rotate(-6).lighten(0.4).round()},
       get caiman(){return this.base.rotate(-6).desaturate(0.2).lighten(1).round()},
