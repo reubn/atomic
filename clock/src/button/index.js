@@ -6,15 +6,18 @@ const press = Symbol('press')
 const release = Symbol('release')
 
 class Button extends EventEmitter {
-  constructor(pin){
+  constructor({toggle=15, led=13}={}){
     super()
 
-    this.pin = pin
+    this.toggle = toggle
+    this.led = led
 
     this.state = null
 
-    rpio.open(pin, rpio.INPUT, rpio.PULL_DOWN)
-    rpio.poll(pin, (...args) => this.pollCallback(...args))
+    rpio.open(toggle, rpio.INPUT, rpio.PULL_DOWN)
+    rpio.poll(toggle, (...args) => this.pollCallback(...args))
+
+    rpio.open(led, rpio.OUTPUT, rpio.PULL_UP)
   }
 
   pollCallback(pin){
@@ -26,5 +29,5 @@ class Button extends EventEmitter {
   }
 }
 
-export default new Button(15)
+export default new Button()
 export {press, release}
