@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
-import {Text, View, ScrollView} from 'react-native'
+import {View, SectionList} from 'react-native'
 
-import Logo from '../../Logo'
+import Item from './Item'
+import ItemSeparator from './ItemSeparator'
+import SectionHeader from './SectionHeader'
+import SectionFooter from './SectionFooter'
 
-import {container, scroll, scrollContainer, call, message} from './styles'
+import {container} from './styles'
 
 export default class Welcome extends Component {
   static navigationOptions = {
@@ -21,10 +24,17 @@ export default class Welcome extends Component {
   render(){
     return (
       <View style={container}>
-        <ScrollView style={scroll} contentContainerStyle={scrollContainer}>
-          <Text style={call}>Scan!</Text>
-          <Text style={message}>Scan!!!</Text>
-        </ScrollView>
+        <SectionList
+          sections={[
+            {title: 'UNPAIRED', data: ['New Clock 1']},
+            {title: 'PAIRED', data: ['Bedroom', 'Kitchen', 'Living Room']}
+          ]}
+          keyExtractor={() => Math.random()}
+          renderItem={Item}
+          ItemSeparatorComponent={ItemSeparator}
+          renderSectionHeader={SectionHeader}
+          renderSectionFooter={SectionFooter}
+        />
       </View>
     )
   }
