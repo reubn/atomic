@@ -1,17 +1,15 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Text, View, ScrollView} from 'react-native'
 
 import Logo from '../../Logo'
 
+import SetupPage from '../SetupPage'
+
 import {container, scroll, scrollContainer, call, message} from './styles'
 
-export default class Welcome extends Component {
+export default class Welcome extends SetupPage {
   static navigationOptions = {
     title: 'Welcome'
-  }
-
-  componentDidMount(){
-    this.props.navigation.setParams(this.params)
   }
 
   params = {

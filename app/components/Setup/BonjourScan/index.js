@@ -1,5 +1,7 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {View, SectionList} from 'react-native'
+
+import SetupPage from '../SetupPage'
 
 import Item from './Item'
 import ItemSeparator from './ItemSeparator'
@@ -8,13 +10,9 @@ import SectionFooter from './SectionFooter'
 
 import {container} from './styles'
 
-export default class Welcome extends Component {
+export default class Welcome extends SetupPage {
   static navigationOptions = {
     title: 'Select Your Clock'
-  }
-
-  componentDidMount(){
-    this.props.navigation.setParams(this.params)
   }
 
   params = {
