@@ -13,7 +13,7 @@ export const colours = {
       get caiman(){return this.base.rotate(-6).desaturate(0.2).lighten(1).round()},
       get dachshund(){return this.base.rotate(-6).desaturate(0.4).lighten(1.2).round()},
       get eagle(){return this.base.rotate(-6).desaturate(0.4).lighten(0.6).round()},
-      get frog(){return this.base.rotate(-6).desaturate(0.4).lighten(0.3).round()},
+      get frog(){return this.base.rotate(-6).desaturate(0.2).lighten(0.3).round()},
       get giraffe(){return this.base.rotate(-6).lighten(0.2).round()}
     }
   },
