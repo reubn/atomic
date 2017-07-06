@@ -13,7 +13,8 @@ export default class Welcome extends SetupPage {
   }
 
   params = {
-    next: 'BonjourScan'
+    rightButtonActive: true,
+    rightButtonHandler: ({navigation: {navigate}}) => navigate('BonjourScan')
   }
 
   render(){

@@ -24,12 +24,18 @@ const results = [
 ]
 
 export default dispatch => {
+  dispatch({type: 'SETUP_BONJOUR_LOADING'})
+
   // Placeholder for proper Bonjour scanning
-  setTimeout(() => dispatch({
-    action: 'SETUP_BONJOUR_SCAN',
-    payload: {
-      timestamp: moment(),
-      results
-    }
-  }), 1000)
+  setTimeout(() => {
+    dispatch({
+      type: 'SETUP_BONJOUR_SCAN',
+      payload: {
+        timestamp: moment(),
+        results: Math.random() > 0.5 ? results : []
+      }
+    })
+
+    dispatch({type: 'SETUP_BONJOUR_LOADING', payload: false})
+  }, 2000)
 }

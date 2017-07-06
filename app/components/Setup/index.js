@@ -5,11 +5,11 @@ import {colours} from '../App/constants'
 import {headerStyle, headerTitleStyle, rightButton} from '../Header'
 
 import Welcome from './Welcome'
-import BonjourScan from './BonjourScan'
+import BonjourScanContainer from './BonjourScanContainer'
 
 export default StackNavigator({
   Welcome: {screen: Welcome},
-  BonjourScan: {screen: BonjourScan}
+  BonjourScan: {screen: BonjourScanContainer}
 }, {
   navigationOptions: navigation => ({
     headerStyle,

@@ -13,4 +13,4 @@ export const headerTitleStyle = {
   color: colours.blue.dark.caiman.toString()
 }
 
-export const rightButton = ({navigation: {navigate, state: {params: {next}={}}={}}}) => <Button title="Next" color={colours.blue.abyssinian.toString()} onPress={() => navigate(next)} />
+export const rightButton = (props, {navigation: {state: {params: {rightButtonActive, rightButtonHandler}={}}={}}}=props) => <Button title="Next" color={rightButtonActive ? colours.blue.abyssinian.toString() : colours.blue.dark.eagle.toString()} onPress={() => rightButtonHandler && rightButtonHandler(props)} />

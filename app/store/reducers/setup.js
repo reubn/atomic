@@ -14,6 +14,18 @@ export default (state=initialState, action) => {
     }
   }
 
+  if(action.type === 'SETUP_BONJOUR_LOADING'){
+    const {payload=true} = action
+
+    return {
+      ...state,
+      bonjourScan: {
+        ...state.bonjourScan,
+        loading: payload
+      }
+    }
+  }
+
   if(action.type === 'SETUP_PICK_CLOCK'){
     return {
       ...state,

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 
-import pickClock from '../../../../../../store/actions/setup/pickClock'
+import pickClock from '../../../../../../../store/actions/setup/pickClock'
 
 import Item from './Item'
 
