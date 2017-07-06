@@ -1,4 +1,4 @@
-import {colours} from '../../../App/constants'
+import {colours} from '../../../../../../App/constants'
 
 export const item = {
   flex: 1,
@@ -9,7 +9,7 @@ export const item = {
 
 export const itemText = selected => ({
   fontSize: 17,
-  color: selected ? colours.blue.dark.dachshund.toString() : colours.blue.dark.caiman.toString()
+  color: selected ? colours.blue.dark.hippo.toString() : colours.blue.dark.frog.toString()
 })
 
 export const icon = {
@@ -19,7 +19,5 @@ export const icon = {
 }
 
 export const iconSpacer = {
-  width: 56,
-  paddingLeft: 23,
-  paddingRight: 22
+  width: 23 + 13 + 22
 }

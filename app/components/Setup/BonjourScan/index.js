@@ -1,12 +1,8 @@
 import React from 'react'
-import {View, SectionList} from 'react-native'
+import {View} from 'react-native'
 
 import SetupPage from '../SetupPage'
-
-import Item from './Item'
-import ItemSeparator from './ItemSeparator'
-import SectionHeader from './SectionHeader'
-import SectionFooter from './SectionFooter'
+import ClockListContainer from './ClockListContainer'
 
 import {container} from './styles'
 
@@ -22,17 +18,7 @@ export default class Welcome extends SetupPage {
   render(){
     return (
       <View style={container}>
-        <SectionList
-          sections={[
-            {title: 'UNPAIRED', data: ['New Clock 1']},
-            {title: 'PAIRED', data: ['Bedroom', 'Kitchen', 'Living Room']}
-          ]}
-          keyExtractor={() => Math.random()}
-          renderItem={Item}
-          ItemSeparatorComponent={ItemSeparator}
-          renderSectionHeader={SectionHeader}
-          renderSectionFooter={SectionFooter}
-        />
+        <ClockListContainer />
       </View>
     )
   }

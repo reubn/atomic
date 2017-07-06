@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux'
 
-import bonjourScan from './bonjourScan'
+import setup from './setup'
 import clock from './clock'
 
 const reducers = {
-  bonjourScan,
+  setup,
   clock
 }
 

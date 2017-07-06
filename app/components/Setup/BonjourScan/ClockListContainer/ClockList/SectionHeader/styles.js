@@ -1,4 +1,4 @@
-import {colours} from '../../../App/constants'
+import {colours} from '../../../../../App/constants'
 
 export const header = {
   paddingTop: 32,
@@ -11,5 +11,5 @@ export const header = {
 
 export const headerTitle = {
   fontSize: 13,
-  color: colours.blue.dark.frog.toString()
+  color: colours.blue.dark.caiman.toString()
 }

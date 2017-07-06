@@ -15,7 +15,8 @@ export default StackNavigator({
     headerStyle,
     headerTitleStyle,
     headerLeft: null,
-    headerRight: rightButton(navigation)
+    headerRight: rightButton(navigation),
+    gesturesEnabled: false
   }),
   cardStyle: {
     backgroundColor: colours.blue.dark.aardvark.toString(),

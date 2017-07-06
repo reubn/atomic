@@ -1,8 +1,8 @@
-import bonjourScan from './bonjourScan'
+import setup from './setup'
 import clock from './clock'
 
 const initials = {
-  bonjourScan,
+  setup,
   clock
 }
 
