@@ -9,7 +9,7 @@ import {container, scroll, scrollContainer, call, message} from './styles'
 
 export default class Welcome extends SetupPage {
   static navigationOptions = {
-    title: 'Welcome'
+    title: 'Atomic'
   }
 
   params = {
