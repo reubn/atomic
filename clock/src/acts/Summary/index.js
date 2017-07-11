@@ -9,10 +9,14 @@ import weather from './weather'
 import Act from '../Act'
 
 class SummaryAct extends Act {
-  async actWillMount(){
+  constructor(){
+    super()
+
     // Weather
     this.weatherPromise = weather()
+  }
 
+  async actWillMount(){
     const {displayTemp, weatherSummary} = await this.weatherPromise
 
     this.displayTemp = displayTemp

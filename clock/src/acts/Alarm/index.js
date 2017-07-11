@@ -23,13 +23,16 @@ class AlarmAct extends Act {
 
     // Button Events
     button.once(press, () => this.onButtonPress())
+
+    // Create SummaryAct ahead of time, to allow time for data fetching
+    this.summaryAct = new SummaryAct()
   }
 
   async onButtonPress(){
     await this.callToCancelLoop()
     await this.outputs.sound.play(successSound)
 
-    this.transitionTo(new SummaryAct())
+    this.transitionTo(this.summaryAct)
   }
 
   render(){
