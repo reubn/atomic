@@ -5,7 +5,7 @@ const location = 'Hereford, UK'
 const apiKey = '151eda8a245c259d13efeca821d9b29e'
 
 export default async () => {
-  const json = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`).catch(console.error('Weather API Call Failed'))
+  const json = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`).catch(() => console.error('Weather API Call Failed'))
   if(!json) return {weatherSummary: '', displayTemp: null}
 
   const todaysForecasts = json.data.list
