@@ -16,23 +16,22 @@ class Manager {
 
     const outputs = {
       display: this.display,
-      sound: this.sound,
-      previousAct: this.currentAct
+      sound: this.sound
     }
 
-    act.start(outputs, next => (next ? this.connect(next) : this.disconnect(act)))
+    act._preActWillMount(outputs, this.currentAct, next => (next ? this.connect(next) : this.disconnect(act)))
 
     this.currentAct = act
   }
 
   disconnect(act){
     if(act === this.currentAct){
-      this.currentAct.end(true)
+      this.currentAct._preActWillUnmount()
 
       this.sound.removeAllListeners()
       this.display.reset()
 
-      this.currentView = null
+      this.currentAct = null
     }
   }
 }

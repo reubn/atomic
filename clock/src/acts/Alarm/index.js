@@ -3,48 +3,37 @@ import SummaryAct from '../Summary'
 import {renderText} from '../../Display'
 import {radiateSound, successSound} from '../../Sound'
 
-class AlarmAct {
-  constructor(alarm){
-    this.alarm = alarm
+import Act from '../Act'
 
-    this.timer = null
-    this.endHandle = null
+class AlarmAct extends Act {
+  constructor(alarm){
+    super()
+    this.alarm = alarm
+  }
+
+  actWillMount(){
+    // Sound
+    this.callToCancelLoop = this.outputs.sound.loop(radiateSound)
+
+    // Display
+    this.outputs.display.setIntensity(16)
 
     // Flash Alternator
     this.flash = false
-  }
-
-  start({display, sound}, end){
-    this.endHandle = end
-
-    // Sound
-    const callToCancel = sound.loop(radiateSound)
-
-    // Display
-    display.setIntensity(16)
-    this.render(display)
-    this.timer = setInterval(() => this.render(display), 500)
 
     // Button Events
-    button.once(press, () => this.onButtonPress(sound, callToCancel))
+    button.once(press, () => this.onButtonPress())
   }
 
-  end(fromDisplayManager=false){
-    if(!fromDisplayManager) return this.endHandle(new SummaryAct())
+  async onButtonPress(){
+    await this.callToCancelLoop()
+    await this.outputs.sound.play(successSound)
 
-    clearInterval(this.timer)
-    this.endHandle = null
+    this.transitionTo(new SummaryAct())
   }
 
-  async onButtonPress(sound, callToCancel){
-    await callToCancel()
-    await sound.play(successSound)
-
-    this.end()
-  }
-
-  render(display){
-    display.display2DArray(renderText(this.alarm.name, display.width, display.height, this.flash ^= 1))
+  render(){
+    this.outputs.display.display2DArray(renderText(this.alarm.name, this.outputs.display.width, this.outputs.display.height, this.flash ^= 1))
   }
 }
 

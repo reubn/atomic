@@ -6,44 +6,26 @@ import {tts, failureSound} from '../../Sound'
 
 import weather from './weather'
 
-class SummaryAct {
-  constructor(){
+import Act from '../Act'
+
+class SummaryAct extends Act {
+  async actWillMount(){
     // Weather
     this.weatherPromise = weather()
-
-    this.displayTemp = null
-
-    this.timer = null
-    this.endHandle = null
-  }
-
-  async start({display, sound}, end){
-    this.endHandle = end
-
-    // Display
-    this.render(display)
-    this.timer = setInterval(() => this.render(display), 500)
 
     const {displayTemp, weatherSummary} = await this.weatherPromise
 
     this.displayTemp = displayTemp
     const ttsStreamAndFormat = await tts({text: `The time is ${moment().format('h:mm; [on] dddd [the] Do [of] MMMM')}. ${weatherSummary}`, lang: 'en-au'})
 
-    if(ttsStreamAndFormat) await sound.play(ttsStreamAndFormat)
-    else await sound.play(failureSound)
-    this.end()
+    if(ttsStreamAndFormat) await this.outputs.sound.play(ttsStreamAndFormat)
+    else await this.outputs.sound.play(failureSound)
+
+    this.transitionTo(new ClockAct())
   }
 
-  end(fromDisplayManager=false){
-    if(!fromDisplayManager) return this.endHandle(new ClockAct())
-
-    clearInterval(this.timer)
-    this.endHandle = null
-    this.displayTemp = null
-  }
-
-  render(display){
-    display.display2DArray(renderText(`${this.displayTemp !== null ? this.displayTemp : '??'}°c`, display.width, display.height, true))
+  render(){
+    this.outputs.display.display2DArray(renderText(`${this.displayTemp !== null ? this.displayTemp : '??'}°c`, this.outputs.display.width, this.outputs.display.height, true))
   }
 }
 
