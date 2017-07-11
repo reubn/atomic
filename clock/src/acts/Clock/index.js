@@ -16,21 +16,22 @@ class ClockAct extends Act {
     this.seconds = false
 
     // Button Events
-    this.buttonHandler = () => {
-      // Invert Seconds Mode
-      this.seconds ^= 1
-
-      // Rerender for fluidity
-      this.render()
-
-      this.outputs.sound.play(tapSound)
-    }
-
-    button.on(press, this.buttonHandler)
+    button.on(press, this.onButtonPress, this)
   }
 
+  onButtonPress(){
+    // Invert Seconds Mode
+    this.seconds ^= 1
+
+    // Rerender for fluidity
+    this.render()
+
+    this.outputs.sound.play(tapSound)
+  }
+
+
   actWillUnmount(){
-    button.removeListener(press, this.buttonHandler)
+    button.removeListener(press, this.onButtonPress, this)
   }
 
   render(){
