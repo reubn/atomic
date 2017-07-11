@@ -10,7 +10,9 @@ class ClockAct {
     this.timer = null
 
     this.seconds = false
-    this.alternateEvenOdd = 0
+
+    // Flash Alternator
+    this.flash = false
   }
 
   start({display, sound}){
@@ -36,9 +38,9 @@ class ClockAct {
   toggleSeconds(){this.seconds = !this.seconds}
 
   render(display){
-    const seconds = this.seconds ? `${(this.alternateEvenOdd % 2) ? ':' : ' '}ss` : ''
-    display.display2DArray(renderText(moment().format(`h${(this.alternateEvenOdd % 2) ? ':' : ' '}mm${seconds}`), display.width, display.height, true))
-    this.alternateEvenOdd++
+    const seconds = this.seconds ? `${this.flash ? ':' : ' '}ss` : ''
+    display.display2DArray(renderText(moment().format(`h${this.flash ? ':' : ' '}mm${seconds}`), display.width, display.height, true))
+    this.flash ^= 1
   }
 }
 

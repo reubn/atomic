@@ -10,7 +10,8 @@ class AlarmAct {
     this.timer = null
     this.endHandle = null
 
-    this.index = 0
+    // Flash Alternator
+    this.flash = false
   }
 
   start({display, sound}, end){
@@ -43,9 +44,7 @@ class AlarmAct {
   }
 
   render(display){
-    display.display2DArray(renderText(this.alarm.name, display.width, display.height, this.index % 2))
-
-    this.index++
+    display.display2DArray(renderText(this.alarm.name, display.width, display.height, this.flash ^= 1))
   }
 }
 
