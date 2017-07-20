@@ -1,6 +1,6 @@
 import font from './font'
 
-export default (text, displayWidth, displayHeight, contrastMode=false) => {
+export default (text, displayWidth, displayHeight, contrastMode=false, horizontalShift=0, verticalShift=0) => {
   const contrastedFont = font(contrastMode)
 
   const setLetters = [...text].reduce((cols, char) => {
@@ -14,11 +14,11 @@ export default (text, displayWidth, displayHeight, contrastMode=false) => {
   const widthRemainder = displayWidth - insertWidth
   const heightRemainder = displayHeight - insertHeight
 
-  const widthBefore = Math.floor(widthRemainder / 2)
-  const widthAfter = Math.ceil(widthRemainder / 2)
+  const widthBefore = Math.floor(widthRemainder / 2) + horizontalShift
+  const widthAfter = Math.ceil(widthRemainder / 2) - horizontalShift
 
-  const heightBefore = Math.floor(heightRemainder / 2)
-  const heightAfter = Math.ceil(heightRemainder / 2)
+  const heightBefore = Math.floor(heightRemainder / 2) + verticalShift
+  const heightAfter = Math.ceil(heightRemainder / 2) - verticalShift
 
   const widthPaddingBefore = Array(widthBefore).fill().map(() => Array(displayHeight).fill(contrastMode))
   const widthPaddingAfter = Array(widthAfter).fill().map(() => Array(displayHeight).fill(contrastMode))
