@@ -1,11 +1,13 @@
 export default class Act {
+  static frameRate = 2
+
   _preActWillMount(outputs, previousAct, transitionTo){
     this.outputs = outputs
     this.previousAct = previousAct
     this.transitionTo = transitionTo
 
     if(this.actWillMount) this.actWillMount()
-    this._renderTimer = setInterval(() => this.render(), this.interval || 500)
+    this._setFrameRate(this.frameRate)
   }
 
   _preActWillUnmount(){
@@ -18,4 +20,10 @@ export default class Act {
 
     if(this.actWillUnmount) this.actWillUnmount()
   }
+
+  _setFrameRate(frameRate){
+    clearInterval(this._renderTimer)
+    this._renderTimer = frameRate !== 0 ? setInterval(() => this.render(), 1000 / (frameRate || Act.frameRate)) : null
+  }
+
 }
