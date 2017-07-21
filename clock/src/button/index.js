@@ -24,7 +24,11 @@ class Button extends EventEmitter {
     const newState = !rpio.read(pin)
     if(this.state === newState) return
 
-    this.state = newState
+    this.trigger(newState)
+  }
+
+  trigger(state=true){
+    this.state = state
     this.emit(this.state ? press : release)
   }
 }
