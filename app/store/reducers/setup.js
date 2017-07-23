@@ -33,5 +33,12 @@ export default (state=initialState, action) => {
     }
   }
 
+  if(action.type === 'SETUP_SAVE_PATTERN'){
+    return {
+      ...state,
+      authPatterns: state.authPatterns.map((pattern, index) => (index === action.payload.index ? action.payload.pattern : pattern))
+    }
+  }
+
   return state
 }
