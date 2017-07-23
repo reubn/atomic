@@ -31,7 +31,7 @@ const init = async () => {
 }
 
 // If auth was blocking, init alarms once complete
-auth.once(authComplete, init())
+auth.once(authComplete, init)
 
 export default init
 export {Alarm}
