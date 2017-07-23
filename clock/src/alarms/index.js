@@ -1,6 +1,7 @@
 import moment from 'moment'
 
 import manager from '../manager'
+import auth, {authComplete} from '../auth'
 import AlarmAct from '../acts/Alarm'
 
 import Alarm from './Alarm'
@@ -22,6 +23,9 @@ const init = async () => {
 
   console.log('Alarms will trigger at', scheduledAlarms.map(alarm => alarm.scheduleDescriptor))
 }
+
+// If auth was blocking, init alarms once complete
+auth.once(authComplete, init())
 
 export default init
 export {Alarm}
