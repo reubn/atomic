@@ -1,36 +1,38 @@
 import button, {press} from '../../button'
-import auth from '../../auth'
+import auth, {authComplete} from '../../auth'
+import {authSuccessSound} from '../../Sound'
+
+import Act from '../Act'
 
 import renderPatterns from './renderPatterns'
 
-class AuthAct {
-  constructor(){
-    this.timer = null
+class AuthAct extends Act {
+  constructor(returnAct){
+    super()
+    this.returnAct = returnAct
   }
 
-  start({display, previousAct}, end){
-    this.previousAct = previousAct
-    this.endHandle = end
-
-    this.render(display)
-    this.timer = setInterval(() => this.render(display), 250)
-
+  actWillMount(){
     this.buttonHandler = () => {
       auth.generatePatterns()
-      this.render(display)
+      this.render()
     }
     button.on(press, this.buttonHandler)
+
+    auth.once(authComplete, () => this.authFinished())
   }
 
-  end(fromDisplayManager=false){
-    if(!fromDisplayManager) return this.endHandle(this.previousAct)
+  async authFinished(){
+    await this.outputs.sound.play(authSuccessSound)
+    this.transitionTo(this.returnAct)
+  }
 
-    clearInterval(this.timer)
+  actWillUnmount(){
     button.removeListener(press, this.buttonHandler)
   }
 
-  render(display){
-    display.display2DArray(renderPatterns(auth.patterns, display.width, display.height, true))
+  render(){
+    this.outputs.display.display2DArray(renderPatterns(auth.patterns, this.outputs.display.width, this.outputs.display.height, true))
   }
 }
 
