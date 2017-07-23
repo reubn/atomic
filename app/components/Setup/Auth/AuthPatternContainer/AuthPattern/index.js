@@ -7,7 +7,6 @@ import {page, col as colStyle} from './styles'
 
 export default class AuthPattern extends Component {
   pixelPress(colIndex, rowIndex){
-    console.log(colIndex, rowIndex)
     const pattern = this.props.pattern
     pattern[colIndex][rowIndex] ^= 1
 

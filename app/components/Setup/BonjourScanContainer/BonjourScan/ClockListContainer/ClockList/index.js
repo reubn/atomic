@@ -9,7 +9,7 @@ import SectionFooter from './SectionFooter'
 export default ({paired, unpaired}) => (
   <SectionList
     sections={[
-      {title: 'UNPAIRED', data: unpaired, l: console.log('B', {paired, unpaired})},
+      {title: 'UNPAIRED', data: unpaired, l: {paired, unpaired}},
       {title: 'PAIRED', data: paired}
     ]}
     keyExtractor={() => Math.random()}

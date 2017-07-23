@@ -30,7 +30,6 @@ export default class Auth extends SetupPage {
             bulletStyle={bullet}
             chosenBulletStyle={chosenBullet}
             bulletsContainerStyle={bulletsContainer}
-            onAnimateNextPage={p => console.log(p)}
           >{authPages}</Carousel>
           <Text style={message}>Look at your clock. From left to right, copy the four patterns that you can see. Swipe to move to the next screen.</Text>
         </ScrollView>
