@@ -6,7 +6,13 @@ import AlarmAct from '../acts/Alarm'
 
 import Alarm from './Alarm'
 
+let hasInit = false
+
 const init = async () => {
+  // Ensure only triggered once
+  if(hasInit) return
+  hasInit = true
+
   await Alarm.clearAll()
 
   const {hours: hour, minutes: minute, seconds: second} = moment().add(2, 's').toObject()
