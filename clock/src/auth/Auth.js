@@ -2,6 +2,7 @@ import {randomBytes} from 'crypto'
 
 import Datastore from 'nedb'
 import moment from 'moment'
+import EventEmitter from 'eventemitter3'
 
 import storeDir from '../store'
 
@@ -9,8 +10,12 @@ import generatePatterns from './generatePatterns'
 
 const store = new Datastore({filename: `${storeDir}/auth`, autoload: true})
 
-export default class Auth {
+export const authComplete = Symbol('authComplete')
+
+export default class Auth extends EventEmitter {
   constructor(){
+    super()
+
     this.patterns = []
     this.generatePatterns()
   }
@@ -42,7 +47,12 @@ export default class Auth {
       expires: moment().add(4, 'w').unix()
     }
 
-    return new Promise((resolve, reject) => (store.insert(token, (err, document) => (err ? reject(err) : resolve(document)))))
+    return new Promise((resolve, reject) => (store.insert(token, (err, document) => {
+      if(err) return reject(err)
+      this.emit(authComplete)
+
+      resolve(document)
+    })))
   }
 
   async extendToken(key){
