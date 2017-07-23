@@ -64,7 +64,7 @@ export default class Auth {
   }
 
   async validTokenExists(){
-    return new Promise((resolve, reject) => store.find({expires: {$gte: moment().unix()}}, (err, documents) => (err ? reject(err) : resolve(!!documents.length))))
+    return new Promise((resolve, reject) => store.find({expires: {$gte: moment().unix()}}, (err, documents) => (err || !documents.length ? reject(err || false) : resolve())))
   }
 
   requestMiddleware(){
