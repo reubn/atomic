@@ -21,7 +21,6 @@ export default class Transitioner {
 
   transitionFinished(){
     this.transitioning = false
-    this.transitionFrame = 0
 
     this.screenIndex = (this.screenIndex + 1) % this.screens.length
 
