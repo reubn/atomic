@@ -18,7 +18,7 @@ class ClockAct extends Act {
       screens: [() => this.minutesRender(), () => this.secondsRender(), () => this.dateRender(), () => this.weekRender()],
       transitionFunction: slide,
       transitionLength: this.outputs.display.width,
-      transitionStartHook: () => this._setFrameRate(350),
+      transitionStartHook: () => this._setFrameRate(270),
       transitionEndHook: () => this._setFrameRate()
     })
 
