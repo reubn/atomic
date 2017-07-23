@@ -8,6 +8,7 @@ import failurePath from './sounds/failure.pcm'
 import tapPath from './sounds/tap.pcm'
 import alarmPath from './sounds/alarm.pcm'
 import radiatePath from './sounds/radiate.pcm'
+import authSuccessPath from './sounds/authSuccess.pcm'
 
 const defaultFormat = {
   bitDepth: 16,         // 16-bit samples
@@ -20,6 +21,7 @@ const failureSound = {format: {...defaultFormat, channels: 1}, stream: new Repla
 const tapSound = {format: {...defaultFormat, channels: 1}, stream: new ReplayableStream(fs.createReadStream(tapPath))}
 const alarmSound = {format: {...defaultFormat, channels: 2}, stream: new ReplayableStream(fs.createReadStream(alarmPath))}
 const radiateSound = {format: {...defaultFormat, channels: 2}, stream: new ReplayableStream(fs.createReadStream(radiatePath))}
+const authSuccessSound = {format: {...defaultFormat, channels: 1}, stream: new ReplayableStream(fs.createReadStream(authSuccessPath))}
 
 export {
   successSound,
@@ -27,7 +29,8 @@ export {
   failureSound,
   tapSound,
   alarmSound,
-  radiateSound
+  radiateSound,
+  authSuccessSound
 }
 
 export {default, end} from './Sound'
