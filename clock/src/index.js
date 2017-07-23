@@ -10,7 +10,7 @@ import AuthAct from './acts/Auth'
 manager.sound.play(bootSound)
 
 auth.validTokenExists()
-.then(() => initAlarms())
+.then(initAlarms)
 .catch(() => manager.connect(new AuthAct(defaultAct)))
 
 initWifi()
