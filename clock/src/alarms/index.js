@@ -3,7 +3,6 @@ import moment from 'moment'
 import manager from '../manager'
 import AlarmAct from '../acts/Alarm'
 
-
 import Alarm from './Alarm'
 
 const init = async () => {
