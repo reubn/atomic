@@ -74,7 +74,7 @@ export default class Auth extends EventEmitter {
   }
 
   async validTokenExists(){
-    return new Promise((resolve, reject) => store.find({expires: {$gte: moment().unix()}}, (err, documents) => (err || !documents.length ? reject(err || false) : resolve())))
+    return new Promise((resolve, reject) => store.find({expires: {$gte: moment().unix()}}, (err, documents) => ((err || !documents.length) ? reject(err || false) : resolve())))
   }
 
   requestMiddleware(){
