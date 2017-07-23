@@ -18,7 +18,11 @@ class ClockAct extends Act {
       screens: [() => this.minutesRender(), () => this.secondsRender(), () => this.dateRender(), () => this.weekRender()],
       transitionFunction: slide,
       transitionLength: this.outputs.display.width,
+
+      // Speed up transition
       transitionStartHook: () => this._setFrameRate(270),
+
+      // Return to normal frame rate
       transitionEndHook: () => this._setFrameRate()
     })
 
@@ -27,12 +31,13 @@ class ClockAct extends Act {
   }
 
   onButtonPress(){
-    // Slide
+    // Trigger slide
     this.transitioner.next()
 
     // Rerender for fluidity
     this.render()
 
+    // Play tap sound
     this.outputs.sound.play(tapSound)
   }
 
@@ -58,6 +63,8 @@ class ClockAct extends Act {
 
   render(){
     this.outputs.display.display2DArray(this.transitioner.render())
+
+    // Invert flash value
     this.flash ^= 1
   }
 }

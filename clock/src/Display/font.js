@@ -1,3 +1,4 @@
+// Set height: 4; Variable width
 export default (o, l=!o) => ({
   0: [[l, l, l, l], [l, o, o, l], [l, l, l, l]],
   1: [[l, o, o, l], [l, l, l, l], [o, o, o, l]],
