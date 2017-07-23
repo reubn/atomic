@@ -9,7 +9,8 @@ import AuthPattern from './AuthPattern'
 const pad = (grid, value, times=1) => upad(dpad(lpad(rpad(grid, times, value), times, value), times, value), times, value)
 
 const memoisedPaddedPattern = defaultMemoize(
-  pattern => (console.log(pattern), pad(pad(pattern, 'blank'), 'align'))
+  pattern => pad(pad(pattern, 'blank'), 'align')
+)
 )
 
 const mapStateToProps = state => ({
