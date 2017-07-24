@@ -14,7 +14,7 @@ class Alarm {
     this.lastRun = lastRun
   }
 
-  get isInDB(){return !!this._id}
+  get isInDB(){return !!this.id}
   get isScheduled(){return !!this.scheduleJob}
 
   insert(){
