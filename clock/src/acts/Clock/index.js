@@ -17,7 +17,7 @@ class ClockAct extends Act {
     this.transitioner = new Transitioner({
       screens: [() => this.minutesRender(), () => this.secondsRender(), () => this.dateRender(), () => this.weekRender()],
       transitionFunction: slide,
-      transitionLength: this.outputs.display.width,
+      transitionLength: this.manager.display.width,
 
       // Speed up transition
       transitionStartHook: () => this._setFrameRate(270),
@@ -38,7 +38,7 @@ class ClockAct extends Act {
     this.render()
 
     // Play tap sound
-    this.outputs.sound.play(tapSound)
+    this.manager.sound.play(tapSound)
   }
 
   actWillUnmount(){
@@ -46,23 +46,31 @@ class ClockAct extends Act {
   }
 
   minutesRender(){
-    return renderText(moment().format(`h${this.flash ? ':' : ' '}mm`), this.outputs.display.width, this.outputs.display.height, true)
+    return renderText(moment().format(`h${this.flash ? ':' : ' '}mm`), this.manager.display.width, this.manager.display.height, true)
   }
 
   secondsRender(){
-    return renderText(moment().format(`h${this.flash ? ':' : ' '}mm${this.flash ? ':' : ' '}ss`), this.outputs.display.width, this.outputs.display.height, true)
+    return renderText(moment().format(`h${this.flash ? ':' : ' '}mm${this.flash ? ':' : ' '}ss`), this.manager.display.width, this.manager.display.height, true)
   }
 
   dateRender(){
-    return renderText(moment().format(`D${this.flash ? '.' : ' '}M${this.flash ? '.' : ' '}YY`), this.outputs.display.width, this.outputs.display.height, true)
+    return renderText(moment().format(`D${this.flash ? '.' : ' '}M${this.flash ? '.' : ' '}YY`), this.manager.display.width, this.manager.display.height, true)
   }
 
   weekRender(){
-    return renderText(moment().format(`ddd D${this.flash ? '.' : ' '}`), this.outputs.display.width, this.outputs.display.height, true, 1)
+    return renderText(moment().format(`ddd D${this.flash ? '.' : ' '}`), this.manager.display.width, this.manager.display.height, true, 1)
+  }
+
+  minuteProgressRender(){
+    const seconds = moment().seconds() % 30
+    const paddingSlice = Array(this.manager.display.height).fill(true)
+    const countingSlice = [true, true, false, true, true, false, true, true]
+
+    return Array(this.manager.display.width).fill().map((_, index) => (index < 1 || index > 30 || index > seconds + 1) ? paddingSlice : countingSlice)
   }
 
   render(){
-    this.outputs.display.display2DArray(this.transitioner.render())
+    this.manager.display.display2DArray(this.transitioner.render())
 
     // Invert flash value
     this.flash ^= 1

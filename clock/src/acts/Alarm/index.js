@@ -13,10 +13,10 @@ class AlarmAct extends Act {
 
   actWillMount(){
     // Sound
-    this.callToCancelLoop = this.outputs.sound.loop(radiateSound)
+    this.callToCancelLoop = this.manager.sound.loop(radiateSound)
 
     // Display
-    this.outputs.display.setIntensity(16)
+    this.manager.display.setIntensity(16)
 
     // Flash Alternator
     this.flash = false
@@ -30,13 +30,13 @@ class AlarmAct extends Act {
 
   async onButtonPress(){
     await this.callToCancelLoop()
-    await this.outputs.sound.play(successSound)
+    await this.manager.sound.play(successSound)
 
     this.transitionTo(this.summaryAct)
   }
 
   render(){
-    this.outputs.display.display2DArray(renderText(this.alarm.name, this.outputs.display.width, this.outputs.display.height, this.flash ^= 1))
+    this.manager.display.display2DArray(renderText(this.alarm.name, this.manager.display.width, this.manager.display.height, this.flash ^= 1))
   }
 }
 

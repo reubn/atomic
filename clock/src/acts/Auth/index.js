@@ -23,7 +23,7 @@ class AuthAct extends Act {
   }
 
   async authFinished(){
-    await this.outputs.sound.play(authSuccessSound)
+    await this.manager.sound.play(authSuccessSound)
     this.transitionTo(this.returnAct)
   }
 
@@ -32,7 +32,7 @@ class AuthAct extends Act {
   }
 
   render(){
-    this.outputs.display.display2DArray(renderPatterns(auth.patterns, this.outputs.display.width, this.outputs.display.height, true))
+    this.manager.display.display2DArray(renderPatterns(auth.patterns, this.manager.display.width, this.manager.display.height, true))
   }
 }
 

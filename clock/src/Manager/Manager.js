@@ -14,12 +14,7 @@ class Manager {
   connect(act){
     if(this.currentAct) this.disconnect(this.currentAct)
 
-    const outputs = {
-      display: this.display,
-      sound: this.sound
-    }
-
-    act._preActWillMount(outputs, this.currentAct, next => (next ? this.connect(next) : this.disconnect(act)))
+    act._preActWillMount({manager: this, previousAct: this.currentAct, transitionTo: next => (next ? this.connect(next) : this.disconnect(act))})
 
     this.currentAct = act
   }

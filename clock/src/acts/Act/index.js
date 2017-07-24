@@ -1,8 +1,8 @@
 export default class Act {
   static frameRate = 2
 
-  _preActWillMount(outputs, previousAct, transitionTo){
-    this.outputs = outputs
+  _preActWillMount({manager, previousAct, transitionTo}){
+    this.manager = manager
     this.previousAct = previousAct
     this.transitionTo = transitionTo
 
@@ -13,7 +13,7 @@ export default class Act {
   _preActWillUnmount(){
     clearInterval(this._renderTimer)
 
-    delete this.outputs
+    delete this.manager
     delete this.previousAct
     delete this.transitionTo
 
