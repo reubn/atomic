@@ -38,16 +38,18 @@ class Alarm {
   }
 
   schedule(handler){
-    if(!this.isScheduled) this.scheduledJob = scheduleJob(this.scheduleDescriptor, () => {
-      // Update lastRun
-      this.lastRun = moment()
-      this.save()
+    if(!this.isScheduled){
+      this.scheduledJob = scheduleJob(this.scheduleDescriptor, () => {
+        // Update lastRun
+        this.lastRun = moment()
+        this.save()
 
-      // Run handler
-      handler(this)
-    })
+        // Run handler
+        handler(this)
+      })
 
-    return this
+      return this
+    }
   }
 
   dehydrate(){
