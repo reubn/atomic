@@ -1,6 +1,6 @@
 export default {
   address: null,
   name: null,
-  accessToken: null,
-  accessExpiration: null
+  key: null,
+  keyExpiration: null
 }
