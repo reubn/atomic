@@ -5,7 +5,7 @@ import api from './api'
 
 const router = new Router()
 
-router.get('/login', login)
+router.post('/login', login)
 
 router.use('/api', api.routes())
 
