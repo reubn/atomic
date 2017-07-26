@@ -4,13 +4,13 @@ import {Provider} from 'react-redux'
 
 import store from '../../store'
 
-import Setup from '../Setup'
+import MainContainer from '../MainContainer'
 
-export default () => {
-  StatusBar.setBarStyle('light-content', true)
-  return (
-    <Provider store={store}>
-      <Setup />
-    </Provider>
-  )
-}
+// Set StatusBar to light
+StatusBar.setBarStyle('light-content', true)
+
+export default () => (
+  <Provider store={store}>
+    <MainContainer />
+  </Provider>
+)
