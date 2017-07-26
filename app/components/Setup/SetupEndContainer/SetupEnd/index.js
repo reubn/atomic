@@ -16,10 +16,7 @@ export default class SetupEnd extends SetupPage {
     leftButtonActive: !this.props.success,
     rightButtonActive: this.props.success,
     leftButtonHandler: ({navigation: {goBack}}) => goBack(),
-    rightButtonHandler: ({navigation: {navigate}}) => {
-      this.props.endSetup()
-      // navigate('SetupEnd')
-    },
+    rightButtonHandler: () => this.props.endSetup(),
     rightButtonProps: {
       title: 'Finish'
     }
