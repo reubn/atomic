@@ -2,7 +2,7 @@ import {StackNavigator} from 'react-navigation'
 
 import {colours} from '../App/constants'
 
-import {headerStyle, headerTitleStyle, rightButton} from '../Header'
+import {headerStyle, headerTitleStyle, rightButton, leftButton} from '../Header'
 
 import Welcome from './Welcome'
 import BonjourScanContainer from './BonjourScanContainer'
@@ -16,7 +16,7 @@ export default StackNavigator({
   navigationOptions: navigation => ({
     headerStyle,
     headerTitleStyle,
-    headerLeft: null,
+    headerLeft: leftButton(navigation),
     headerRight: rightButton(navigation),
     gesturesEnabled: false
   }),
