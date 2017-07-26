@@ -5,7 +5,7 @@ import bonjourScan from '../../../store/actions/setup/bonjourScan'
 import BonjourScan from './BonjourScan'
 
 const mapStateToProps = state => ({
-  clockSelected: state.setup.selectedClock !== null,
+  clockSelected: state.setup.selectedClock.address !== null,
   empty: !state.setup.bonjourScan.results.length,
   loading: state.setup.bonjourScan.loading
 })

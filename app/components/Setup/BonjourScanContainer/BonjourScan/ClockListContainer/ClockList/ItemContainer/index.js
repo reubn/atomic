@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mergeProps = ({selectedClock}, {pickClockUnbound}, {item}) => ({
   ...item,
-  selected: selectedClock === item.host,
+  selected: selectedClock.address === item.host,
   pickClock: () => pickClockUnbound(item)
 })
 
