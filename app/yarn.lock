@@ -2686,7 +2686,7 @@ json-stable-stringify@^1.0.1:
   dependencies:
     jsonify "~0.0.0"
 
-json-stringify-safe@~5.0.1:
+json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
@@ -3866,6 +3866,12 @@ redux-logger@^2.7.4:
   resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-2.10.2.tgz#3c5a5f0a6f32577c1deadf6655f257f82c6c3937"
   dependencies:
     deep-diff "0.3.4"
+
+redux-persist@next:
+  version "5.0.0-proto.7"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.0.0-proto.7.tgz#553f9e1b95f9fa16d6444e771e4b19ff77f3b824"
+  dependencies:
+    json-stringify-safe "^5.0.1"
 
 redux-thunk@^2.2.0:
   version "2.2.0"
