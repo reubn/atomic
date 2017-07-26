@@ -8,9 +8,9 @@ const mapStateToProps = state => ({
   success: !!state.setup.selectedClock.key
 })
 
-const mapDispatchToProps = dispatch => ({
-  endSetupUnchecked: () => endSetup(dispatch)
-})
+const mapDispatchToProps = {
+  endSetupUnchecked: () => (dispatch, getState) => endSetup(dispatch, getState)
+}
 
 const mergeProps = ({success}, {endSetupUnchecked}, passdown) => ({
   ...passdown,
