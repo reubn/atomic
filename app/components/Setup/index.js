@@ -6,12 +6,12 @@ import {headerStyle, headerTitleStyle, rightButton, leftButton} from '../Header'
 
 import Welcome from './Welcome'
 import BonjourScanContainer from './BonjourScanContainer'
-import Auth from './Auth'
+import AuthContainer from './AuthContainer'
 
 export default StackNavigator({
   Welcome: {screen: Welcome},
   BonjourScan: {screen: BonjourScanContainer},
-  Auth: {screen: Auth}
+  Auth: {screen: AuthContainer},
 }, {
   navigationOptions: navigation => ({
     headerStyle,

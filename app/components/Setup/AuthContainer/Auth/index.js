@@ -2,7 +2,7 @@ import React from 'react'
 import {Text, View, ScrollView} from 'react-native'
 import Carousel from 'react-native-looped-carousel'
 
-import SetupPage from '../SetupPage'
+import SetupPage from '../../SetupPage'
 
 import AuthPatternContainer from './AuthPatternContainer'
 
@@ -14,8 +14,15 @@ export default class Auth extends SetupPage {
   }
 
   params = {
-    rightButtonActive: true,
-    rightButtonHandler: ({navigation: {navigate}}) => navigate('')
+    rightButtonActive: this.props.patternsValid,
+    rightButtonHandler: ({navigation: {navigate}}) => {
+      this.props.sendAuth()
+      navigate('SetupEnd')
+    }
+  }
+
+  componentWillReceiveProps({patternsValid}){
+    if(this.props.patternsValid !== patternsValid) this.props.navigation.setParams({...this.params, rightButtonActive: patternsValid})
   }
 
   render(){

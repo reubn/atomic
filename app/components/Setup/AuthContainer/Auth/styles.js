@@ -1,6 +1,6 @@
 import {Dimensions} from 'react-native'
 
-import {colours} from '../../App/constants'
+import {colours} from '../../../App/constants'
 
 const {width, height} = Dimensions.get('window')
 const minDimension = Math.min(width, height)

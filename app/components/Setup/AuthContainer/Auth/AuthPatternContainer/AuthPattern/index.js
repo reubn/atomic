@@ -6,9 +6,11 @@ import Pixel from './Pixel'
 import {page, col as colStyle} from './styles'
 
 export default class AuthPattern extends Component {
-  pixelPress(colIndex, rowIndex){
-    const pattern = this.props.pattern
-    pattern[colIndex][rowIndex] ^= 1
+  pixelPress(changeColIndex, changeRowIndex){
+    const pattern = this.props.pattern.map((col, colIndex) => {
+      if(changeColIndex === colIndex) return col.map((pixel, rowIndex) => (changeRowIndex === rowIndex ? !pixel : pixel))
+      return col
+    })
 
     this.props.savePattern(pattern)
   }

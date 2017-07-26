@@ -1,4 +1,4 @@
-import {colours} from '../../../../App/constants'
+import {colours} from '../../../../../App/constants'
 
 export const page = {
   padding: 20,
