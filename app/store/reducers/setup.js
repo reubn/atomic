@@ -29,7 +29,10 @@ export default (state=initialState, action) => {
   if(action.type === 'SETUP_PICK_CLOCK'){
     return {
       ...state,
-      selectedClock: action.payload
+      selectedClock: {
+        ...state.selectedClock,
+        address: action.payload
+      }
     }
   }
 
@@ -37,6 +40,32 @@ export default (state=initialState, action) => {
     return {
       ...state,
       authPatterns: state.authPatterns.map((pattern, index) => (index === action.payload.index ? action.payload.pattern : pattern))
+    }
+  }
+
+  if(action.type === 'SETUP_AUTH_LOADING'){
+    const {payload=true} = action
+
+    return {
+      ...state,
+      authLoading: payload
+    }
+  }
+
+  if(action.type === 'SETUP_AUTH_SUCCESS'){
+    return {
+      ...state,
+      selectedClock: {
+        ...state.selectedClock,
+        ...action.payload
+      }
+    }
+  }
+
+  if(action.type === 'SETUP_AUTH_FAIL'){
+    return {
+      ...state,
+      authPatterns: initialState.authPatterns
     }
   }
 
