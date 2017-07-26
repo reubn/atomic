@@ -1,4 +1,5 @@
 import {createStore} from 'redux'
+import {persistStore} from 'redux-persist'
 
 import reducers from './reducers'
 import initials from './initials'
@@ -9,5 +10,6 @@ const store = createStore(
   initials,
   middleware
 )
+persistStore(store)
 
 export default store
