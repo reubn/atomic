@@ -1,10 +1,10 @@
 import React from 'react'
-import {Text} from 'react-native'
 
 import Setup from '../../Setup'
+import TabController from './TabController'
 
 export default ({setupMode}) => {
   if(setupMode) return <Setup />
 
-  return <Text>Ayyyyy!</Text>
+  return <TabController />
 }
