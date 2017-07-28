@@ -4,6 +4,7 @@ import {AsyncStorage} from 'react-native'
 
 import setup from './setup'
 import clock from './clock'
+import alarms from './alarms'
 
 const config = {
   key: 'root',
@@ -12,7 +13,8 @@ const config = {
 
 const reducers = {
   setup,
-  clock
+  clock,
+  alarms
 }
 
 export default persistReducer(config, combineReducers(reducers))
