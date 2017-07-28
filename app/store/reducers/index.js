@@ -6,8 +6,8 @@ import setup from './setup'
 import clock from './clock'
 
 const config = {
-  key: 'root', // key is required
-  storage: AsyncStorage // storage is now required
+  key: 'root',
+  storage: AsyncStorage
 }
 
 const reducers = {
