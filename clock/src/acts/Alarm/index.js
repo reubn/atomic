@@ -1,9 +1,10 @@
 import button, {press} from '../../button'
-import SummaryAct from '../Summary'
+import {defaultAct} from '../../manager'
 import {renderText} from '../../Display'
 import {radiateSound, successSound} from '../../Sound'
 
 import Act from '../Act'
+import SummaryAct from '../Summary'
 
 class AlarmAct extends Act {
   constructor(alarm){
@@ -25,14 +26,14 @@ class AlarmAct extends Act {
     button.once(press, () => this.onButtonPress())
 
     // Create SummaryAct ahead of time, to allow time for data fetching
-    this.summaryAct = new SummaryAct()
+    if(this.alarm.summary) this.summaryAct = new SummaryAct()
   }
 
   async onButtonPress(){
     await this.callToCancelLoop()
     await this.manager.sound.play(successSound)
 
-    this.transitionTo(this.summaryAct)
+    this.transitionTo(this.alarm.summary ? this.summaryAct : defaultAct)
   }
 
   render(){

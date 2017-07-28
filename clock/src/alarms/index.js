@@ -20,7 +20,8 @@ const init = async () => {
 
   const testAlarm = new Alarm({
     name: 'Test 1',
-    scheduleDescriptor: {hour, minute, second}
+    scheduleDescriptor: {hour, minute, second},
+    summary: true
   })
   await testAlarm.save()
 

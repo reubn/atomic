@@ -7,10 +7,11 @@ import storeDir from '../store'
 const store = new Datastore({filename: `${storeDir}/alarms`, autoload: true})
 
 class Alarm {
-  constructor({_id, name='Alarm', scheduleDescriptor, lastRun=null}){
+  constructor({_id, name='Alarm', scheduleDescriptor, summary=false, lastRun=null}){
     this.id = _id
     this.name = name
     this.scheduleDescriptor = scheduleDescriptor
+    this.summary = summary
     this.lastRun = lastRun
   }
 
@@ -57,6 +58,7 @@ class Alarm {
       _id: this.id,
       name: this.name,
       scheduleDescriptor: this.scheduleDescriptor,
+      summary: this.summary,
       lastRun: this.lastRun ? this.lastRun.unix() : null
     }
   }
