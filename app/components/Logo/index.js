@@ -3,9 +3,9 @@ import {Svg} from 'expo'
 
 import {colours} from '../App/constants'
 
-export default () =>
+export default (passdown={}) =>
   (
-    <Svg width="186" height="254" viewBox="0 0 186 254">
+    <Svg width="186" height="254" viewBox="0 0 186 254" {...passdown}>
       <Svg.Rect id="Rectangle" fill={colours.white.base.toString()} x="68" y="136" width="50" height="50" rx="8" />
       <Svg.Rect id="Rectangle" fill={colours.blue.dark.baboon.toString()} x="68" y="68" width="50" height="50" rx="8" />
       <Svg.Rect id="Rectangle" fill={colours.white.base.toString()} x="136" y="136" width="50" height="50" rx="8" />
