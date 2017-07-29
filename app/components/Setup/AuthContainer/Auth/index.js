@@ -2,27 +2,29 @@ import React from 'react'
 import {Text, View, ScrollView} from 'react-native'
 import Carousel from 'react-native-looped-carousel'
 
-import SetupPage from '../../SetupPage'
+import {StackPage} from '../.././../CustomStackNavigator'
 
 import AuthPatternContainer from './AuthPatternContainer'
 
 import {container, scroll, scrollContainer, carousel, message, authPage, bulletsContainer, chosenBullet, bullet} from './styles'
 
-export default class Auth extends SetupPage {
+export default class Auth extends StackPage {
   static navigationOptions = {
     title: 'Pairing'
   }
 
   params = {
-    rightButtonActive: this.props.patternsValid,
-    rightButtonHandler: ({navigation: {navigate}}) => {
-      this.props.sendAuth()
-      navigate('SetupEnd')
+    rightButton: {
+      active: this.props.patternsValid,
+      handler: ({navigation: {navigate}}) => {
+        this.props.sendAuth()
+        navigate('SetupEnd')
+      }
     }
   }
 
   componentWillReceiveProps({patternsValid}){
-    if(this.props.patternsValid !== patternsValid) this.props.navigation.setParams({...this.params, rightButtonActive: patternsValid})
+    if(this.props.patternsValid !== patternsValid) this.props.navigation.setParams({...this.params, rightButton: {...this.params.rightButton, active: patternsValid}})
   }
 
   render(){

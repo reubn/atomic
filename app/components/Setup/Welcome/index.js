@@ -3,18 +3,20 @@ import {Text, View, ScrollView} from 'react-native'
 
 import Logo from '../../Logo'
 
-import SetupPage from '../SetupPage'
+import {StackPage} from '../../CustomStackNavigator'
 
 import {container, scroll, scrollContainer, call, message} from './styles'
 
-export default class Welcome extends SetupPage {
+export default class Welcome extends StackPage {
   static navigationOptions = {
     title: 'Atomic'
   }
 
   params = {
-    rightButtonActive: true,
-    rightButtonHandler: ({navigation: {navigate}}) => navigate('BonjourScan')
+    rightButton: {
+      active: true,
+      handler: ({navigation: {navigate}}) => navigate('BonjourScan')
+    }
   }
 
   render(){

@@ -3,27 +3,43 @@ import {Text, ScrollView} from 'react-native'
 
 import {Ionicons} from '@expo/vector-icons'
 
-import SetupPage from '../../SetupPage'
+import {StackPage} from '../.././../CustomStackNavigator'
 
 import {container, text as textStyle, success as successStyle, fail as failStyle} from './styles'
 
-export default class SetupEnd extends SetupPage {
+export default class SetupEnd extends StackPage {
   static navigationOptions = {
     title: ''
   }
 
   params = {
-    leftButtonActive: !this.props.success,
-    rightButtonActive: this.props.success,
-    leftButtonHandler: ({navigation: {goBack}}) => goBack(),
-    rightButtonHandler: () => this.props.endSetup(),
-    rightButtonProps: {
-      title: 'Finish'
+    leftButton: {
+      active: !this.props.success,
+      handler: ({navigation: {goBack}}) => goBack()
+    },
+    rightButton: {
+      active: this.props.success,
+      handler: () => this.props.endSetup(),
+      props: {
+        title: 'Finish'
+      }
     }
   }
 
   componentWillReceiveProps({success}){
-    if(this.props.success !== success) this.props.navigation.setParams({...this.params, rightButtonActive: success, leftButtonActive: !success})
+    if(this.props.success !== success){
+      this.props.navigation.setParams({
+        ...this.params,
+        rightButton: {
+          ...this.params.rightButton,
+          active: success
+        },
+        leftButton: {
+          ...this.params.leftButton,
+          active: !success
+        }
+      })
+    }
   }
 
   render(){
