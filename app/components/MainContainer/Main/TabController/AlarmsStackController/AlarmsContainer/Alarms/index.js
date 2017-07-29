@@ -5,7 +5,7 @@ import {StackPage} from '../../../../../../CustomStackNavigator'
 
 export default class Alarms extends StackPage {
   static navigationOptions = {
-    title: 'Pairing'
+    title: 'Alarms'
   }
   componentWillMount(){
     this.props.getAlarms()
