@@ -1,10 +1,10 @@
 import React from 'react'
 
-import Setup from '../../Setup'
+import SetupStackController from '../../SetupStackController'
 import TabController from './TabController'
 
 export default ({setupMode}) => {
-  if(setupMode) return <Setup />
+  if(setupMode) return <SetupStackController />
 
   return <TabController />
 }
