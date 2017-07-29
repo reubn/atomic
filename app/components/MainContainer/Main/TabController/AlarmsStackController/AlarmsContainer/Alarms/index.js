@@ -1,11 +1,13 @@
 import React from 'react'
 import {View, Text} from 'react-native'
 
+import Logo from '../../../../../../Logo'
+
 import {StackPage} from '../../../../../../CustomStackNavigator'
 
 export default class Alarms extends StackPage {
   static navigationOptions = {
-    title: 'Alarms'
+    title: <Logo height={32} />
   }
   componentWillMount(){
     this.props.getAlarms()
