@@ -2,12 +2,12 @@ import {TabNavigator} from 'react-navigation'
 
 import {colours} from '../../../App/constants'
 
-import AlarmsContainer from './AlarmsContainer'
+import AlarmsStackController from './AlarmsStackController'
 
 import {style} from './styles'
 
 export default TabNavigator({
-  Alarms: {screen: AlarmsContainer}
+  Alarms: {screen: AlarmsStackController}
 }, {
   swipeEnabled: true,
   animationEnabled: true,

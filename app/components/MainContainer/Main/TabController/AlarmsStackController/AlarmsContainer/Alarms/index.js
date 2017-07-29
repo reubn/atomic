@@ -1,7 +1,12 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {View, Text} from 'react-native'
 
-export default class Alarms extends Component {
+import {StackPage} from '../../../../../../CustomStackNavigator'
+
+export default class Alarms extends StackPage {
+  static navigationOptions = {
+    title: 'Pairing'
+  }
   componentWillMount(){
     this.props.getAlarms()
   }

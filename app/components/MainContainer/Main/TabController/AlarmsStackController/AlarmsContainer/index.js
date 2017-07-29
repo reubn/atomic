@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 
 import Alarms from './Alarms'
 
-import getAlarms from '../../../../../store/actions/getAlarms'
+import getAlarms from '../../../../../../store/actions/getAlarms'
 
 const mapStateToProps = state => ({
   alarms: Object.values(state.alarms)
