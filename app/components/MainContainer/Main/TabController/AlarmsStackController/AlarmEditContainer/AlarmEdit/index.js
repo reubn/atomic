@@ -6,15 +6,17 @@ import {StackPage} from '../../../../../../CustomStackNavigator'
 import TimePicker from './TimePicker'
 import DayPicker from './DayPicker'
 import InputField from './InputField'
+import ToggleField from './ToggleField'
 
 import {} from './styles'
 
 export default class AlarmEdit extends StackPage {
-  constructor({navigation: {state: {params: {alarm: {name, scheduleDescriptor: {hour=4, minute=20, days={3: true, 5: true}}}}}}}){
+  constructor({navigation: {state: {params: {alarm: {name, enabled, scheduleDescriptor: {hour=4, minute=20, days={3: true, 5: true}}}}}}}){
     super()
 
     this.state = {
       name,
+      enabled,
       hour,
       minute,
       days,
@@ -56,6 +58,7 @@ export default class AlarmEdit extends StackPage {
         <TimePicker hour={this.state.hour} minute={this.state.minute} period={this.state.period} onChange={(field, value) => this.setState({[field]: value})} />
         <DayPicker days={this.state.days} onChange={(day, value) => this.setState(({days}) => ({days: {...days, [day]: value}}))} />
         <InputField title="Name" value={this.state.name} onChange={name => this.setState({name})} />
+        <ToggleField title="Enabled" value={this.state.enabled} onChange={enabled => this.setState({enabled})} />
         <Text>{JSON.stringify(this.scheduleDescriptor, null, 2)}</Text>
       </ScrollView>
     )
