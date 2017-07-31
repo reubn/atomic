@@ -1,9 +1,12 @@
 import React from 'react'
-import {View, Text} from 'react-native'
+import {ScrollView, FlatList} from 'react-native'
 
 import LogoButtonContainer from './LogoButtonContainer'
 
 import {StackPage} from '../../../../../../CustomStackNavigator'
+
+import ItemContainer from './ItemContainer'
+import ItemSeparator from './ItemSeparator'
 
 export default class Alarms extends StackPage {
   static navigationOptions = {
@@ -14,9 +17,14 @@ export default class Alarms extends StackPage {
   }
   render(){
     return (
-      <View>
-        <Text>{JSON.stringify(this.props.alarms, null, 2)}</Text>
-      </View>
+      <ScrollView>
+        <FlatList
+          data={this.props.alarms.map(alarm => ({...alarm, key: alarm.id}))}
+          renderItem={({item}) => <ItemContainer navigation={this.props.navigation} item={item} />}
+          ItemSeparatorComponent={ItemSeparator}
+          ListFooterComponent={ItemSeparator}
+        />
+      </ScrollView>
     )
   }
 }
