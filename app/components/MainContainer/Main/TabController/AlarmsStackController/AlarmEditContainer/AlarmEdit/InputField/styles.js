@@ -21,6 +21,7 @@ export const title = {
 export const input = {
   flex: 3,
   color: colours.blue.dark.hippo.toString(),
-  fontSize: 17
+  fontSize: 17,
+  marginRight: 17
 }
 export const cursorColor = colours.orange.base.toString()
