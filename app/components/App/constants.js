@@ -15,7 +15,8 @@ export const colours = {
       get eagle(){return this.base.rotate(-6).desaturate(0.4).lighten(0.6).round()},
       get frog(){return this.base.rotate(-6).desaturate(0.4).lighten(1).round()},
       get giraffe(){return this.base.rotate(-6).lighten(0.2).round()},
-      get hippo(){return this.base.rotate(-6).desaturate(0.6).lighten(5).round()}
+      get hippo(){return this.base.rotate(-6).desaturate(0.6).lighten(5).round()},
+      get iguana(){return this.base.rotate(-6).desaturate(0.6).lighten(4).round()},
     }
   },
   white: {
