@@ -4,6 +4,7 @@ import {ScrollView, Text} from 'react-native'
 import {StackPage} from '../../../../../../CustomStackNavigator'
 
 import TimePicker from './TimePicker'
+import DayPicker from './DayPicker'
 
 
 export default class AlarmEdit extends StackPage {
@@ -47,6 +48,7 @@ export default class AlarmEdit extends StackPage {
     return (
       <ScrollView>
         <TimePicker hour={this.state.hour} minute={this.state.minute} period={this.state.period} onChange={(field, value) => this.setState({[field]: value})} />
+        <DayPicker days={this.state.days} onChange={(day, value) => this.setState(({days}) => ({days: {...days, [day]: value}}))} />
         <Text>{JSON.stringify(this.scheduleDescriptor, null, 2)}</Text>
       </ScrollView>
     )

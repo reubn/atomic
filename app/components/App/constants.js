@@ -17,6 +17,7 @@ export const colours = {
       get giraffe(){return this.base.rotate(-6).lighten(0.2).round()},
       get hippo(){return this.base.rotate(-6).desaturate(0.6).lighten(5).round()},
       get iguana(){return this.base.rotate(-6).desaturate(0.6).lighten(4).round()},
+      get jay(){return this.base.rotate(-6).desaturate(0.4).lighten(0.4).round()}
     }
   },
   white: {
