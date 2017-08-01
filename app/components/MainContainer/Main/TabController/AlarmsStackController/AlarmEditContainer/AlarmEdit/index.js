@@ -17,10 +17,10 @@ export default class AlarmEdit extends StackPage {
     this.state = {
       name,
       enabled,
-      hour,
+      hour: (hour % 12) || 12,
       minute,
       days,
-      period: 'am'
+      period: hour < 12 ? 'am' : 'pm'
     }
   }
   static navigationOptions = {
