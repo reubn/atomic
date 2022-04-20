@@ -1,7 +1,7 @@
 {
   "name": "Atomic",
   "version": "0.0.0",
-  "author": "Reuben Eggar",
+  "author": "Reuben",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.24.1",
