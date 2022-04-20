@@ -1,7 +1,7 @@
 import axios from 'axios'
 import moment from 'moment'
 
-const location = 'Hereford, UK'
+const location = 'UK'
 const apiKey = '151eda8a245c259d13efeca821d9b29e'
 
 export default async () => {
